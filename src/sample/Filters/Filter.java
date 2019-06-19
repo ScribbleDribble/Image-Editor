@@ -1,31 +1,32 @@
 package sample.Filters;
 
+
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
 
 
 public abstract class Filter {
 
-    private int width;
-    private int height;
-    private File f;
-    private BufferedImage img;
+    protected int width;
+    protected int height;
+    protected BufferedImage img;
 
-    public Filter(File f, int width, int height) {
-        this.f = f;
-        this.width = width;
-        this.height = height;
+    public Filter() {}
+
+    public Filter(BufferedImage img) throws IOException {
+
+        this.img = img;
+        this.height = img.getHeight();
+        this.width = img.getWidth();
     }
 
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
+    public BufferedImage getImg() {
+        return img;
     }
 
     public void adjustPixels() {}
@@ -34,8 +35,7 @@ public abstract class Filter {
         try {
 
             File out = new File("Out.jpg");
-
-            ImageIO.write(img, "jpg", f);
+            ImageIO.write(img, "jpg", out);
         }
 
         catch(IOException e) {
