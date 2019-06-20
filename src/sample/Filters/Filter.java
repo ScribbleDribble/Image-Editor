@@ -25,12 +25,15 @@ public abstract class Filter {
         this.width = img.getWidth();
     }
 
+    // for testing purposes
     public BufferedImage getImg() {
         return img;
     }
 
+    // algorithm for a specific filter, to be implemented
     public void adjustPixels() {}
 
+    // saves all changes to output file
     public void writeOver() {
         try {
 

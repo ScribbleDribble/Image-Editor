@@ -1,6 +1,6 @@
 package sample.Filters;
 
-import sun.awt.image.ImageWatched;
+
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -20,19 +20,21 @@ public class Test {
         BufferedImage image = null;
 
         image = ImageIO.read(f);
+        BufferedImage image2 = ImageIO.read(f);
 
         Filter filter = new Greyscale(image);
-        Filter filter2 = new Brightness(image, 0);
+        Filter filter2 = new Brightness(image2, 30);
+        Filter filter3 = new ColourOver(image, "blue");
 
-        filter.adjustPixels();
+
+
+        Filter filter60 = new Gamma(image2, 2.2);
+
+
+
+        filter60.adjustPixels();
         filter2.adjustPixels();
-
-        filter.writeOver();
-
-        System.out.println(((Greyscale) filter).getImg());
-        System.out.println(((Brightness) filter2).getImg());
-
-        //filter2.writeOver();
+        filter60.writeOver();
 
 
     }
