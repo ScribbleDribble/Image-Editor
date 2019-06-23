@@ -12,7 +12,7 @@ public class Test {
 
     public static void main(String[] args) throws IOException {
 
-        System.out.println("testing");
+
         File f = new File("family.jpg");
 
         LinkedList<Filter> filterList = new LinkedList<>();
@@ -24,17 +24,20 @@ public class Test {
 
         Filter filter = new Greyscale(image);
         Filter filter2 = new Brightness(image2, 30);
-        Filter filter3 = new ColourOver(image, "blue");
+        Filter filter3 = new ColourOver(image, "cyan");
 
 
 
         Filter filter60 = new Gamma(image2, 2.2);
 
+        filter3.adjustPixels();
+        filter3.writeOver();
 
+/*
+        filter.adjustPixels();
+        filter.writeOver();
+*/
 
-        filter60.adjustPixels();
-        filter2.adjustPixels();
-        filter60.writeOver();
 
 
     }
