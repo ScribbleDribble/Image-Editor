@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -36,6 +37,12 @@ public class Controller  {
 
     @FXML
     MenuItem menuContrast;
+    @FXML
+    MenuItem menuColourOver;
+    @FXML
+    MenuItem menuGreyscale;
+    @FXML
+    MenuItem menuGamma;
 
     @FXML
     ImageView imgView;
@@ -97,8 +104,31 @@ public class Controller  {
 
         if (event.getSource() == menuBrightness)
         {
-            stageLoader("../brightnessScene.fxml");
+            stageLoader("../Views/brightnessScene.fxml");
         }
+
+        else if (event.getSource() == menuContrast)
+        {
+            stageLoader("../Views/contrastScene.fxml");
+        }
+
+        else if (event.getSource() == menuColourOver)
+        {
+            stageLoader("../Views/ColourOverScene.fxml");
+        }
+
+        else if (event.getSource() == menuGamma)
+        {
+            stageLoader("../Views/gammaScene.fxml");
+        }
+
+        else if (event.getSource() == menuGreyscale)
+        {
+            stageLoader("../Views/greyscaleScene.fxml");
+        }
+
+
+
 
 
 /*

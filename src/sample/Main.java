@@ -1,7 +1,6 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,7 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample2.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Views/sample2.fxml"));
         //Parent root2 = FXMLLoader.load(getClass().getResource("brightnessScence.fxml"));
 
 

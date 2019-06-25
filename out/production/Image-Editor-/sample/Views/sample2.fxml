@@ -26,10 +26,10 @@
             <Menu mnemonicParsing="false" text="Filters">
               <items>
                 <MenuItem fx:id="menuBrightness" mnemonicParsing="false" onAction="#menuItemAction" text="Brightness" />
-                <MenuItem mnemonicParsing="false" text="Contrast" />
-                <MenuItem mnemonicParsing="false" text="Colour Over" />
-                <MenuItem mnemonicParsing="false" text="Gamma" />
-                <MenuItem mnemonicParsing="false" text="Greyscale" />
+                <MenuItem fx:id="menuContrast" mnemonicParsing="false" onAction="#menuItemAction" text="Contrast" />
+                <MenuItem fx:id="menuColourOver" mnemonicParsing="false" onAction="#menuItemAction" text="Colour Over" />
+                <MenuItem fx:id="menuGamma" mnemonicParsing="false" onAction="#menuItemAction" text="Gamma" />
+                <MenuItem fx:id="menuGreyscale" mnemonicParsing="false" onAction="#menuItemAction" text="Greyscale" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">

@@ -29,7 +29,7 @@
                 <MenuItem fx:id="menuBrightness" mnemonicParsing="false" text="Brightness" />
                 <MenuItem fx:id="menuContrast" mnemonicParsing="false" text="Contrast" />
                 <MenuItem fx:id="menuColourOver" mnemonicParsing="false" text="Colour Over" />
-                <MenuItem fx:id="menuColourOver" mnemonicParsing="false" text="Gamma" />
+                <MenuItem fx:id="menuGamma" mnemonicParsing="false" text="Gamma" />
                 <MenuItem fx:id="menuGreyscale" mnemonicParsing="false" text="Greyscale" />
               </items>
             </Menu>
@@ -52,7 +52,7 @@
    <bottom>
       <AnchorPane prefHeight="77.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnAdjustBrightness" layoutX="527.0" layoutY="4.0" mnemonicParsing="false" onAction="#btnAdjustBrightnessAction" text="Adjust" />
+            <Button fx:id="btnAdjust" layoutX="527.0" layoutY="4.0" mnemonicParsing="false" onAction="#radioBtnAction" text="Adjust" />
             <RadioButton fx:id="red" layoutX="16.0" layoutY="7.0" mnemonicParsing="false" text="Red" />
             <RadioButton fx:id="green" layoutX="130.0" layoutY="6.0" mnemonicParsing="false" text="Green" />
             <RadioButton fx:id="blue" layoutX="248.0" layoutY="7.0" mnemonicParsing="false" text="Blue" />

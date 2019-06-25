@@ -23,11 +23,11 @@ public class Test {
         BufferedImage image2 = ImageIO.read(f);
 
         Filter filter = new Greyscale(image);
-        Filter filter2 = new Brightness(image2, -30);
-        Filter filter3 = new ColourOver(image, "cyan");
+        //Filter filter2 = new Brightness(image2, -30);
+        ColourOver filter3 = new ColourOver(image, "red");
 
-        filter2.adjustPixels();
-        filter2.writeOver();
+        filter3.adjustPixels();
+        filter3.writeOver();
 
        // Filter filter60 = new Gamma(image2, 2.2);
 

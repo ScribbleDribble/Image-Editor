@@ -13,6 +13,8 @@ public class ColourOver extends Filter {
 
     public ColourOver(BufferedImage img, String colour) throws IOException {
         super(img);
+
+        System.out.println("img inside filter\n"+ img);
         this.colour = colour;
     }
 
@@ -34,22 +36,27 @@ public class ColourOver extends Filter {
 
                     case ("red"):
                         p = (r << 16) | (0 << 8) | 0;
+                        break;
 
                     case ("blue"):
                         p = (0 << 16) | (0 << 0) | b;
+                        break;
 
                     case ("green"):
                         p = (0 << 16) | (g << 8) | 0;
+                        break;
 
                     case ("yellow"):
                         p = (r << 16) | (g << 8) | 0;
+                        break;
 
                     case ("magenta"):
                         p = (r << 16) | (0 << 8) | b;
+                        break;
 
                     case ("cyan"):
                         p = (0 << 16) | (g << 8 ) | b;
-
+                        break;
                 }
 
                 img.setRGB(j, i, p);

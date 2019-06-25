@@ -43,6 +43,8 @@ public class BrightnessController implements Initializable {
     private Image img;
     private BufferedImage bufferedImage = null;
     private BufferedImage tempBufferedImage = null;
+    private File f = null;
+
 
     private static final double INIT_VALUE = 0;
 
@@ -64,6 +66,8 @@ public class BrightnessController implements Initializable {
         {
             // brightness values on scale of -1 to 1 so we need to normalise value to get an appropriate brightness adjustment
 
+            // to reset image so that values dont add to previous image.
+            bufferedImage = ImageIO.read(f);
 
             Filter filter = new Brightness(bufferedImage, (int) (slider.getValue()));
             filter.adjustPixels();
@@ -74,10 +78,9 @@ public class BrightnessController implements Initializable {
             img = new Image(f.toURI().toString());
             imgView.setImage(img);
 
-            bufferedImage = tempBufferedImage;
+
 
         }
-
 
         else{
             System.out.println("no image selected");
@@ -96,6 +99,8 @@ public class BrightnessController implements Initializable {
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png, *.JPEG"));
 
         File selectedFile = fc.showOpenDialog(null);
+        f = selectedFile;
+
 
         if (selectedFile != null)
         {
