@@ -4,7 +4,7 @@ package sample.Controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
+
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
@@ -16,10 +16,13 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Controller {
+
+public class Controller  {
 
     @FXML
     MenuItem menuOpenFile;
@@ -32,9 +35,24 @@ public class Controller {
     MenuItem menuBrightness;
 
     @FXML
+    MenuItem menuContrast;
+
+    @FXML
     ImageView imgView;
 
-    public void menuOpenFileAction(ActionEvent e) {
+    private Image img = null;
+
+    private BufferedImage bufferedImage = null;
+
+    public Image getImage(){
+        return img;
+    }
+
+    public BufferedImage getBufferedImage() {
+        return bufferedImage;
+    }
+
+    public void menuOpenFileAction(ActionEvent e){
 
         File initialDir = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Pictures");
         FileChooser fc = new FileChooser();
@@ -48,8 +66,24 @@ public class Controller {
         if (selectedFile != null)
         {
             Image image = new Image(selectedFile.toURI().toString());
+
+
+
             imgView.setImage(image);
+            // store image inside field so it can be retrieved later
+            this.img = image;
+
+
+            try {
+                bufferedImage = ImageIO.read(selectedFile);
+            }
+
+            catch (IOException err)
+            {
+                System.out.println(err);
+            }
         }
+
 
         else
         {
@@ -58,8 +92,16 @@ public class Controller {
 
     }
 
-    public void menuBrightnessAction(ActionEvent event) throws IOException {
+    public void menuItemAction(ActionEvent event) throws IOException {
 
+
+        if (event.getSource() == menuBrightness)
+        {
+            stageLoader("../brightnessScene.fxml");
+        }
+
+
+/*
         Parent brightnessView = FXMLLoader.load(getClass().getResource("../brightnessScene.fxml"));
         Scene brightScene = new Scene(brightnessView);
 
@@ -70,8 +112,19 @@ public class Controller {
         window.setScene(brightScene);
         //window.setFullScreen(true);
         window.show();
+*/
+    }
 
+    public void stageLoader(String fxmlFile) throws IOException {
 
+        Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
+
+        Scene scene = new Scene(root);
+
+        Stage window = (Stage) myMenuBar.getScene().getWindow();
+
+        window.setScene(scene);
+        window.show();
 
     }
 

@@ -25,7 +25,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Filters">
               <items>
-                <MenuItem fx:id="menuBrightness" mnemonicParsing="false" onAction="#menuBrightnessAction" text="Brightness" />
+                <MenuItem fx:id="menuBrightness" mnemonicParsing="false" onAction="#menuItemAction" text="Brightness" />
                 <MenuItem mnemonicParsing="false" text="Contrast" />
                 <MenuItem mnemonicParsing="false" text="Colour Over" />
                 <MenuItem mnemonicParsing="false" text="Gamma" />
