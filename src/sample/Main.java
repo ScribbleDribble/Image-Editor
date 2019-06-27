@@ -11,10 +11,6 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("Views/sample2.fxml"));
-        //Parent root2 = FXMLLoader.load(getClass().getResource("brightnessScence.fxml"));
-
-
-
 
 
         primaryStage.setTitle("Image Edit 0.1");

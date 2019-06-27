@@ -182,7 +182,6 @@ public class ColourOverController implements Initializable {
         }
 
 
-        System.out.println("backupImage when file is loaded:\n" + backUpImage + "END\n");
     }
 
     public void menuItemAction(ActionEvent event) throws IOException {

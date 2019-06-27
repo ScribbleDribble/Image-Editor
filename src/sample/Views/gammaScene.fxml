@@ -24,15 +24,6 @@
                 <MenuItem mnemonicParsing="false" text="Delete" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Filters">
-              <items>
-                <MenuItem fx:id="menuBrightness" mnemonicParsing="false" text="Brightness" />
-                <MenuItem fx:id="menuContrast" mnemonicParsing="false" text="Contrast" />
-                <MenuItem fx:id="menuColourOver" mnemonicParsing="false" text="Colour Over" />
-                <MenuItem fx:id="menuGamma" mnemonicParsing="false" text="Gamma" />
-                <MenuItem fx:id="menuGreyscale" mnemonicParsing="false" text="Greyscale" />
-              </items>
-            </Menu>
             <Menu mnemonicParsing="false" text="Help">
               <items>
                 <MenuItem mnemonicParsing="false" text="About" />

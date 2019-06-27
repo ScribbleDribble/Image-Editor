@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controllers.Controller">
+<BorderPane id="BorderPane" fx:id="home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controllers.Controller">
   <top>
     <VBox>
       <children>
@@ -46,6 +46,9 @@
       <VBox prefHeight="327.0" prefWidth="105.0" BorderPane.alignment="CENTER" />
    </left>
    <center>
-  <ImageView fx:id="imgView" fitHeight="233.0" fitWidth="359.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+  <ImageView fx:id="imgView" fitHeight="233.0" fitWidth="359.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../../../drawing.png" />
+         </image></ImageView>
    </center>
 </BorderPane>

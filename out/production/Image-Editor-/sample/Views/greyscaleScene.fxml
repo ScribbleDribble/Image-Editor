@@ -8,29 +8,15 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.paint.*?>
 
-<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controllers.BrightnessController">
+<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controllers.GreyscaleController">
   <top>
     <VBox>
       <children>
         <MenuBar>
           <menus>
-            <Menu mnemonicParsing="false" text="File">
-              <items>
-                <MenuItem fx:id="menuOpenFile" mnemonicParsing="false" onAction="#menuOpenFileAction" text="Open" />
-              </items>
-            </Menu>
             <Menu mnemonicParsing="false" text="Edit">
               <items>
                 <MenuItem mnemonicParsing="false" text="Delete" />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Filters">
-              <items>
-                <MenuItem fx:id="menuBrightness" mnemonicParsing="false" text="Brightness" />
-                <MenuItem fx:id="menuContrast" mnemonicParsing="false" text="Contrast" />
-                <MenuItem fx:id="menuColourOver" mnemonicParsing="false" text="Colour Over" />
-                <MenuItem fx:id="menuGamma" mnemonicParsing="false" text="Gamma" />
-                <MenuItem fx:id="menuGreyscale" mnemonicParsing="false" text="Greyscale" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
