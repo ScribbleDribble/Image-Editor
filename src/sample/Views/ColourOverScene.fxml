@@ -14,23 +14,9 @@
       <children>
         <MenuBar>
           <menus>
-            <Menu mnemonicParsing="false" text="File">
-              <items>
-                <MenuItem fx:id="menuOpenFile" mnemonicParsing="false" onAction="#menuOpenFileAction" text="Open" />
-              </items>
-            </Menu>
             <Menu mnemonicParsing="false" text="Edit">
               <items>
                 <MenuItem mnemonicParsing="false" text="Delete" />
-              </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Filters">
-              <items>
-                <MenuItem fx:id="menuBrightness" mnemonicParsing="false" onAction="#menuItemAction" text="Brightness" />
-                <MenuItem fx:id="menuContrast" mnemonicParsing="false" onAction="#menuItemAction" text="Contrast" />
-                <MenuItem fx:id="menuColourOver" mnemonicParsing="false" onAction="#menuItemAction" text="Colour Over" />
-                <MenuItem fx:id="menuGamma" mnemonicParsing="false" onAction="#menuItemAction" text="Gamma" />
-                <MenuItem fx:id="menuGreyscale" mnemonicParsing="false" onAction="#menuItemAction" text="Greyscale" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
@@ -52,13 +38,14 @@
    <bottom>
       <AnchorPane prefHeight="77.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnAdjust" layoutX="527.0" layoutY="4.0" mnemonicParsing="false" onAction="#radioBtnAction" text="Adjust" />
+            <Button fx:id="btnAdjust" layoutX="527.0" layoutY="4.0" mnemonicParsing="false" onAction="#btnAdjustAction" text="Adjust" />
             <RadioButton fx:id="red" layoutX="16.0" layoutY="7.0" mnemonicParsing="false" text="Red" />
             <RadioButton fx:id="green" layoutX="130.0" layoutY="6.0" mnemonicParsing="false" text="Green" />
             <RadioButton fx:id="blue" layoutX="248.0" layoutY="7.0" mnemonicParsing="false" text="Blue" />
             <RadioButton fx:id="yellow" layoutX="356.0" layoutY="6.0" mnemonicParsing="false" text="Yellow" />
             <RadioButton fx:id="magenta" layoutX="16.0" layoutY="39.0" mnemonicParsing="false" text="Magenta" />
             <RadioButton fx:id="cyan" layoutX="130.0" layoutY="39.0" mnemonicParsing="false" text="Cyan" />
+            <Button fx:id="btnFinalise" layoutX="526.0" layoutY="45.0" mnemonicParsing="false" onAction="#btnFinaliseAction" text="Finalise" />
          </children>
       </AnchorPane>
    </bottom>

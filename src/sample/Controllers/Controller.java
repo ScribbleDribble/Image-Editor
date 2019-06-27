@@ -15,6 +15,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import javafx.stage.Modality;
+import sample.Filters.ColourOver;
 
 
 import javax.imageio.ImageIO;
@@ -48,9 +49,6 @@ public class Controller  {
     @FXML
     ImageView imgView;
 
-
-
-    //private Controller controller;
 
     private Image img = null;
 
@@ -167,7 +165,14 @@ public class Controller  {
 
         else if (fxmlFile == "../Views/contrastScene.fxml")
         {
+            ContrastController contrastController = loader.getController();
+            contrastController.setImageContext(img, bufferedImage, f, this);
+        }
 
+        else if (fxmlFile == "../Views/ColourOverScene.fxml")
+        {
+            ColourOverController colourOverController = loader.getController();
+            colourOverController.setImageContext(img, bufferedImage, f, this);
         }
 
         Stage stage = new Stage();

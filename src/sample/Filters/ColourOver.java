@@ -14,7 +14,7 @@ public class ColourOver extends Filter {
     public ColourOver(BufferedImage img, String colour) throws IOException {
         super(img);
 
-        System.out.println("img inside filter\n"+ img);
+
         this.colour = colour;
     }
 

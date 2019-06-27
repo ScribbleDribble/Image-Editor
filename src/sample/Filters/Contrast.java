@@ -3,7 +3,7 @@ package sample.Filters;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-class Contrast extends Filter {
+public class Contrast extends Filter {
 
     private int contrast_value;
 

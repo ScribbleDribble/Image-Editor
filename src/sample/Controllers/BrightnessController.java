@@ -66,7 +66,7 @@ public class BrightnessController implements Initializable {
 
 
 
-    public void btnFinaliseAction() throws IOException {
+    public void btnFinaliseAction(){
         controller.setImage(img);
         controller.setBufferedImage(bufferedImage);
     }
@@ -78,6 +78,9 @@ public class BrightnessController implements Initializable {
             // brightness values on scale of -1 to 1 so we need to normalise value to get an appropriate brightness adjustment
 
             // to reset image so that values dont add to previous image.
+            //UNDER CONSTRUCTION** we need to find a way so that the image is edited based on finalised change
+            // e.g  contrast edited -> brightness is now being edited on top of the resultant contrast change
+
             bufferedImage = ImageIO.read(f);
 
             Filter filter = new Brightness(bufferedImage, (int) (slider.getValue()));

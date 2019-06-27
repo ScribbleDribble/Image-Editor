@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import sample.Filters.ColourOver;
+import sample.Filters.Contrast;
 import sample.Filters.Filter;
 
 
@@ -26,27 +27,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ColourOverController implements Initializable {
-
-    @FXML
-    MenuItem menuOpenFile;
-
-    @FXML
-    MenuBar myMenuBar;
-
-
-    @FXML
-    MenuItem menuBrightness;
-
-    @FXML
-    MenuItem menuContrast;
-    @FXML
-    MenuItem menuColourOver;
-    @FXML
-    MenuItem menuGreyscale;
-    @FXML
-    MenuItem menuGamma;
-
+public class ColourOverController {
 
     @FXML
     RadioButton red;
@@ -62,31 +43,34 @@ public class ColourOverController implements Initializable {
     RadioButton cyan;
     @FXML
     Button btnAdjust;
-
+    @FXML
+    Button btnFinalise;
     @FXML
     ImageView imgView;
 
     private BufferedImage bufferedImage;
-    private BufferedImage backUpImage;
     private Image img = null;
     private File f;
+    private Controller controller;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
 
+    public void setImageContext(Image image, BufferedImage bufferedImage, File f, Controller controller) {
+        this.img = image;
+        this.bufferedImage = bufferedImage;
+        imgView.setImage(this.img);
+        this.f = f;
+        this.controller = controller;
     }
 
-
-    public void radioBtnAction() throws IOException {
+    public void btnAdjustAction() throws IOException {
 
         bufferedImage = ImageIO.read(f);
-        System.out.println("backupImage when action function is called :\n" + backUpImage + "END\n");
 
         if (img != null)
         {
             if (red.isSelected())
             {
-                System.out.println("hi");
+                System.out.println();
                 Filter colourOver = new ColourOver(bufferedImage, "red");
                 colourOver.adjustPixels();
                 colourOver.writeOver();
@@ -127,9 +111,10 @@ public class ColourOverController implements Initializable {
             }
 
             File f = new File("Out.jpg");
+            img = new Image(f.toURI().toString());
 
-            //img = new Image(f.toURI().toString());
             imgView.setImage(new Image(f.toURI().toString()));
+
         }
 
         else {
@@ -139,95 +124,13 @@ public class ColourOverController implements Initializable {
 
     }
 
-
-
-    public void menuOpenFileAction(ActionEvent e){
-
-        File initialDir = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Pictures");
-        FileChooser fc = new FileChooser();
-
-        fc.setInitialDirectory(initialDir);
-        // set supported images to load
-        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png, *.JPEG"));
-
-        File selectedFile = fc.showOpenDialog(null);
-        f = selectedFile;
-
-        if (selectedFile != null)
-        {
-            Image image = new Image(selectedFile.toURI().toString());
-
-
-
-            imgView.setImage(image);
-            // store image inside field so it can be retrieved later
-            this.img = image;
-
-
-            try {
-                bufferedImage = ImageIO.read(selectedFile);
-                backUpImage = ImageIO.read(selectedFile);
-            }
-
-            catch (IOException err)
-            {
-                System.out.println(err);
-            }
-        }
-
-
-        else
-        {
-            System.out.println("file not found");
-        }
-
-
-    }
-
-    public void menuItemAction(ActionEvent event) throws IOException {
-
-
-        if (event.getSource() == menuBrightness)
-        {
-            stageLoader("../Views/brightnessScene.fxml");
-        }
-
-        else if (event.getSource() == menuContrast)
-        {
-            stageLoader("../Views/contrastScene.fxml");
-        }
-
-        else if (event.getSource() == menuColourOver)
-        {
-            stageLoader("../Views/ColourOverScene.fxml");
-        }
-
-        else if (event.getSource() == menuGamma)
-        {
-            stageLoader("../Views/gammaScene.fxml");
-        }
-
-        else if (event.getSource() == menuGreyscale)
-        {
-            stageLoader("../Views/greyscaleScene.fxml");
-        }
-
-
+    public void btnFinaliseAction() {
+        controller.setImage(img);
+        controller.setBufferedImage(bufferedImage);
     }
 
 
-    public void stageLoader(String fxmlFile) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
-
-        Scene scene = new Scene(root);
-
-        Stage window = (Stage) myMenuBar.getScene().getWindow();
-
-        window.setScene(scene);
-        window.show();
-
-    }
 
 
 }
