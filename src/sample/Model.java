@@ -1,7 +1,9 @@
 package sample;
 
-import java.awt.*;
+
+
 import java.awt.image.BufferedImage;
+import javafx.scene.image.Image;
 
 public class Model {
 
@@ -10,6 +12,15 @@ public class Model {
 
     private Image image;
     private BufferedImage bufferedImage;
+
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public void setBufferedImage(BufferedImage bufferedImage) {
+        this.bufferedImage = bufferedImage;
+    }
 
     public Image getImage() {
         return image;

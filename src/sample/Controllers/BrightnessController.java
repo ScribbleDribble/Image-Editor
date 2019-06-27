@@ -2,23 +2,16 @@ package sample.Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Slider;
+import javafx.fxml.Initializable;
+
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+
 import sample.Filters.Brightness;
 import sample.Filters.Filter;
 
-import javafx.scene.control.Button;
-import sample.Main;
 
 import javax.imageio.ImageIO;
 
@@ -42,7 +35,7 @@ public class BrightnessController implements Initializable {
     Button btnAdjustBrightness;
 
     @FXML
-    Controller controller;
+    private Controller controller;
 
     @FXML
     Button btnFinalise;
@@ -51,8 +44,8 @@ public class BrightnessController implements Initializable {
     private static BufferedImage bufferedImage = null;
     private File f = null;
 
-
     private static final double INIT_VALUE = 0;
+
 
 
     @Override
@@ -60,7 +53,6 @@ public class BrightnessController implements Initializable {
         slider.setValue(INIT_VALUE);
         slider.setMin(-255);
         slider.setMax(255);
-
     }
 
 
@@ -70,17 +62,11 @@ public class BrightnessController implements Initializable {
         imgView.setImage(this.img);
         this.f = f;
         this.controller = controller;
-
-
     }
 
-    @FXML
+
+
     public void btnFinaliseAction() throws IOException {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Views/sample2.fxml"));
-
-        // if brightness scene
-        Controller controller = loader.getController();
         controller.setImage(img);
         controller.setBufferedImage(bufferedImage);
     }

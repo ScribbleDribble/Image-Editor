@@ -1,7 +1,5 @@
 package sample.Controllers;
 
-
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +15,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import javafx.stage.Modality;
-import sample.Filters.Brightness;
+
 
 import javax.imageio.ImageIO;
 
@@ -50,8 +48,9 @@ public class Controller  {
     @FXML
     ImageView imgView;
 
-    @FXML
-    private Controller controller;
+
+
+    //private Controller controller;
 
     private Image img = null;
 
@@ -68,6 +67,7 @@ public class Controller  {
     public BufferedImage getBufferedImage() {
         return bufferedImage;
     }
+
 
 
 
@@ -97,6 +97,8 @@ public class Controller  {
                 bufferedImage = ImageIO.read(selectedFile);
                 image_loaded = true;
                 f = selectedFile;
+
+
             }
 
             catch (IOException err)
@@ -114,7 +116,6 @@ public class Controller  {
     }
 
     public void setImage(Image img) {
-        System.out.println("hiiiiiii");
         this.img = img;
         imgView.setImage(img);
     }
@@ -124,10 +125,6 @@ public class Controller  {
     }
 
     public void menuItemAction(ActionEvent event) throws IOException {
-
-        System.out.println(event.getSource());
-
-
 
         if (event.getSource() == menuBrightness)
         {
@@ -158,16 +155,21 @@ public class Controller  {
 
     public void stageLoader(String fxmlFile) throws IOException {
 
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+
         Parent root = loader.load();
 
-        // if brightness scene
-        BrightnessController brightnessController = loader.getController();
-        brightnessController.setImageContext(img, bufferedImage, f, controller);
+        if (fxmlFile == "../Views/brightnessScene.fxml")
+        {
+            BrightnessController brightnessController = loader.getController();
+            brightnessController.setImageContext(img, bufferedImage, f, this);
+        }
 
+        else if (fxmlFile == "../Views/contrastScene.fxml")
+        {
 
-        //Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
+        }
+
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
 
