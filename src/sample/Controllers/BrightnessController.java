@@ -46,6 +46,8 @@ public class BrightnessController implements Initializable {
 
     private static final double INIT_VALUE = 0;
 
+    private Filter filter;
+
 
 
     @Override
@@ -53,23 +55,23 @@ public class BrightnessController implements Initializable {
         slider.setValue(INIT_VALUE);
         slider.setMin(-255);
         slider.setMax(255);
+
+
     }
 
-
-    public void setImageContext(Image image, BufferedImage bufferedImage, File f, Controller controller) {
+    // supplies image data to the local filter controller
+    public void setImageContext(Image image, BufferedImage bufferedImage, File f, Controller controller) throws IOException{
         this.img = image;
         this.bufferedImage = bufferedImage;
         imgView.setImage(this.img);
         this.f = f;
         this.controller = controller;
+
+        File out = new File("Out.jpg");
+        //ImageIO.write(bufferedImage, "jpg", out);
     }
 
 
-
-    public void btnFinaliseAction(){
-        controller.setImage(img);
-        controller.setBufferedImage(bufferedImage);
-    }
 
 
     public void btnAdjustBrightnessAction(ActionEvent event) throws IOException {
@@ -92,10 +94,25 @@ public class BrightnessController implements Initializable {
             img = new Image(f.toURI().toString());
             imgView.setImage(img);
 
+            this.filter = filter;
+
 
         } else {
             System.out.println("no image selected");
         }
+
+    }
+
+
+    public void btnFinaliseAction() throws IOException{
+
+        filter.saveChanges();
+
+        controller.setImage(img);
+        controller.setBufferedImage(bufferedImage);
+
+        File outFile = new File("OutFinal.jpg");
+        controller.setFile(outFile);
 
     }
 

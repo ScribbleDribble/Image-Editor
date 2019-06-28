@@ -1,5 +1,6 @@
 package sample.Filters;
 
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -16,12 +17,15 @@ public class Contrast extends Filter {
 
         int width = img.getWidth();
         int height = img.getHeight();
-        int r, g, b, adjusted_r = 0, adjusted_g = 0, adjusted_b = 0;
+        int r, g, b;
+        double adjusted_r = 0, adjusted_g = 0, adjusted_b = 0;
 
         //contrast correction factor
-        float factor;
+        double factor;
 
-        factor = (259 * (contrast_value + 255))/(255 * (259 - contrast_value));
+        factor =(double) (259 * (contrast_value + 255))/ (double)(255 * (259 - contrast_value));
+
+        System.out.println(factor);
 
         for (int i = 0; i < height; i++)
         {
@@ -33,11 +37,11 @@ public class Contrast extends Filter {
                 g = p >> 8 & 0xff;
                 b = p & 0xff;
 
-                adjusted_r = Colour.colourBoundaryCheck( (int) factor * (r - 128) + 128);
-                adjusted_g = Colour.colourBoundaryCheck( (int) factor * (g - 128) + 128);
-                adjusted_b = Colour.colourBoundaryCheck( (int) factor * (b - 128) + 128);
+                adjusted_r = Colour.colourBoundaryCheckDouble(  factor * (r - 128) + 128);
+                adjusted_g = Colour.colourBoundaryCheckDouble(  factor * (g - 128) + 128);
+                adjusted_b = Colour.colourBoundaryCheckDouble( factor * (b - 128) + 128);
 
-                img.setRGB(j, i, adjusted_r << 16 | adjusted_g << 8 | adjusted_b);
+                img.setRGB(j, i, (int) adjusted_r << 16 | (int) adjusted_g << 8 | (int) adjusted_b);
 
             }
         }

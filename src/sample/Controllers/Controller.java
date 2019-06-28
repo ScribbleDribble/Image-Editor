@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import javafx.stage.Modality;
 import sample.Filters.ColourOver;
+import sample.Filters.Greyscale;
 
 
 import javax.imageio.ImageIO;
@@ -96,7 +97,6 @@ public class Controller  {
                 image_loaded = true;
                 f = selectedFile;
 
-
             }
 
             catch (IOException err)
@@ -121,6 +121,8 @@ public class Controller  {
     public void setBufferedImage(BufferedImage bufferedImage) {
         this.bufferedImage = bufferedImage;
     }
+
+    public void setFile(File file) { this.f = file; }
 
     public void menuItemAction(ActionEvent event) throws IOException {
 
@@ -174,6 +176,19 @@ public class Controller  {
             ColourOverController colourOverController = loader.getController();
             colourOverController.setImageContext(img, bufferedImage, f, this);
         }
+
+        else if (fxmlFile == "../Views/gammaScene.fxml")
+        {
+            GammaController gammaController = loader.getController();
+            gammaController.setImageContext(img, bufferedImage, f, this);
+        }
+
+        else if (fxmlFile == "../Views/greyscaleScene.fxml")
+        {
+            GreyscaleController greyscaleController = loader.getController();
+            greyscaleController.setImageContext(img, bufferedImage, f, this);
+        }
+
 
         Stage stage = new Stage();
         stage.setScene(new Scene(root));

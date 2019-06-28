@@ -26,18 +26,12 @@ public class Test {
         //Filter filter2 = new Brightness(image2, -30);
         ColourOver filter3 = new ColourOver(image, "red");
 
-        filter3.adjustPixels();
-        filter3.writeOver();
+        Filter gamma = new Gamma(image, 7);
 
-       // Filter filter60 = new Gamma(image2, 2.2);
+        gamma.adjustPixels();
+        gamma.saveChanges();
 
-        //filter3.adjustPixels();
-       //ilter3.writeOver();
 
-/*
-        filter.adjustPixels();
-        filter.writeOver();
-*/
 
 
 

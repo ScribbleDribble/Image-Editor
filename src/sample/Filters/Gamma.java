@@ -20,7 +20,7 @@ public class Gamma extends Filter {
        int r, g, b;
        double adjusted_r = 0, adjusted_g = 0, adjusted_b = 0;
 
-       double gamma_correction, gamma = 3;
+       double gamma_correction;
 
        for (int i = 0; i < height; i++)
        {

@@ -39,7 +39,8 @@
       <AnchorPane BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="202.0" layoutY="8.0" text="Add Greyscale" />
-            <Button fx:id="btnAdjust" layoutX="333.0" layoutY="3.0" mnemonicParsing="false" text="Adjust" />
+            <Button fx:id="btnAdjust" layoutX="333.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnAdjustAction" text="Adjust" />
+            <Button fx:id="btnFinalise" layoutX="428.0" layoutY="2.0" mnemonicParsing="false" onAction="#btnFinaliseAction" text="Finalise" />
          </children>
       </AnchorPane>
    </bottom>

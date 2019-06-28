@@ -52,6 +52,8 @@ public class ColourOverController {
     private Image img = null;
     private File f;
     private Controller controller;
+    
+    private Filter filter;
 
 
     public void setImageContext(Image image, BufferedImage bufferedImage, File f, Controller controller) {
@@ -65,49 +67,49 @@ public class ColourOverController {
     public void btnAdjustAction() throws IOException {
 
         bufferedImage = ImageIO.read(f);
-
+        
         if (img != null)
         {
             if (red.isSelected())
             {
                 System.out.println();
-                Filter colourOver = new ColourOver(bufferedImage, "red");
-                colourOver.adjustPixels();
-                colourOver.writeOver();
+                filter = new ColourOver(bufferedImage, "red");
+                filter.adjustPixels();
+                filter.writeOver();
             }
 
             else if (green.isSelected())
             {
-                Filter colourOver = new ColourOver(bufferedImage, "green");
-                colourOver.adjustPixels();
-                colourOver.writeOver();
+                filter = new ColourOver(bufferedImage, "green");
+                filter.adjustPixels();
+                filter.writeOver();
             }
 
             else if (blue.isSelected())
             {
-                Filter colourOver = new ColourOver(bufferedImage, "blue");
-                colourOver.adjustPixels();
-                colourOver.writeOver();
+                filter = new ColourOver(bufferedImage, "blue");
+                filter.adjustPixels();
+                filter.writeOver();
             }
             else if (yellow.isSelected())
             {
-                Filter colourOver = new ColourOver(bufferedImage, "yellow");
-                colourOver.adjustPixels();
-                colourOver.writeOver();
+                filter = new ColourOver(bufferedImage, "yellow");
+                filter.adjustPixels();
+                filter.writeOver();
             }
 
             else if (magenta.isSelected())
             {
-                Filter colourOver = new ColourOver(bufferedImage, "magenta");
-                colourOver.adjustPixels();
-                colourOver.writeOver();
+                filter = new ColourOver(bufferedImage, "magenta");
+                filter.adjustPixels();
+                filter.writeOver();
             }
 
             else if (cyan.isSelected())
             {
-                Filter colourOver = new ColourOver(bufferedImage, "cyan");
-                colourOver.adjustPixels();
-                colourOver.writeOver();
+                filter = new ColourOver(bufferedImage, "cyan");
+                filter.adjustPixels();
+                filter.writeOver();
             }
 
             File f = new File("Out.jpg");
@@ -124,9 +126,16 @@ public class ColourOverController {
 
     }
 
-    public void btnFinaliseAction() {
+    public void btnFinaliseAction() throws IOException{
         controller.setImage(img);
         controller.setBufferedImage(bufferedImage);
+
+        filter.saveChanges();
+        File outFile = new File("OutFinal.jpg");
+        controller.setFile(outFile);
+
+
+
     }
 
 

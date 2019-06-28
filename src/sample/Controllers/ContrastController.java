@@ -33,6 +33,8 @@ public class ContrastController implements Initializable {
     private File f;
     private Controller controller;
 
+    private Filter filter;
+
     private static final double INIT_VALUE = 0;
 
     @Override
@@ -52,7 +54,6 @@ public class ContrastController implements Initializable {
 
     public void btnAdjustAction() throws IOException {
 
-
         if (bufferedImage != null) {
             // brightness values on scale of -1 to 1 so we need to normalise value to get an appropriate brightness adjustment
 
@@ -65,6 +66,8 @@ public class ContrastController implements Initializable {
             filter.adjustPixels();
             filter.writeOver();
 
+            this.filter = filter;
+
             File f = new File("Out.jpg");
 
             img = new Image(f.toURI().toString());
@@ -76,9 +79,15 @@ public class ContrastController implements Initializable {
         }
     }
 
-    public void btnFinaliseAction() {
+    public void btnFinaliseAction() throws IOException {
         controller.setImage(img);
         controller.setBufferedImage(bufferedImage);
+
+        // save resultant change to the final file and send file to main controller so it can now be loaded everywhere else
+        filter.saveChanges();
+        File outFile = new File("OutFinal.jpg");
+        controller.setFile(outFile);
+
     }
 
 }

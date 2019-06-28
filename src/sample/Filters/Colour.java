@@ -53,5 +53,17 @@ class Colour {
         return value;
     }
 
+    public static double colourBoundaryCheckDouble(double value) {
+        if (value < 0)
+        {
+            value = 0;
+        }
+
+        else if (value > 255) {
+            value = 255;
+        }
+
+        return value;
+    }
 
 }
