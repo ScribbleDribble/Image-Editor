@@ -69,8 +69,8 @@ public class BrightnessController implements Initializable {
 
 
 
-        File out = new File("Out.png");
-        ImageIO.write(bufferedImage, "png", out);
+        File out = new File("Out.jpg");
+        ImageIO.write(bufferedImage, "jpg", out);
     }
 
 
@@ -83,14 +83,13 @@ public class BrightnessController implements Initializable {
 
             // to reset image so that values dont add to previous image.
 
-            System.out.println("hi");
             bufferedImage = ImageIO.read(f);
 
             Filter filter = new Brightness(bufferedImage, (int) (slider.getValue()));
             filter.adjustPixels();
             filter.writeOver();
 
-            File f = new File("Out.png");
+            File f = new File("Out.jpg");
 
             img = new Image(f.toURI().toString(), 300, 200, false, true);
 
@@ -119,9 +118,7 @@ public class BrightnessController implements Initializable {
         //controller.setImage(img);
         controller.setBufferedImage(bufferedImage);
 
-
-
-        File outFile = new File("OutFinal.png");
+        File outFile = new File("OutFinal.jpg");
         controller.setFile(outFile);
 
     }

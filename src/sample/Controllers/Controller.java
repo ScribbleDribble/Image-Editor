@@ -95,6 +95,7 @@ public class Controller  {
         FileChooser fc = new FileChooser();
 
         fc.setInitialDirectory(initialDir);
+
         // set supported images to load
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png, *.JPEG"));
 
@@ -102,16 +103,12 @@ public class Controller  {
 
         if (selectedFile != null)
         {
-            //Image image = new Image(selectedFile.toURI().toString());
-
-            Image image = new Image(selectedFile.toURI().toString(), 300, 200, false, true);
-
+            Image image = new Image(selectedFile.toURI().toString(), IMAGE_WIDTH, IMAGE_HEIGHT, true, true);
 
             gc = canvas.getGraphicsContext2D();
 
             gc.drawImage(image, 0, 0, image.getWidth(), image.getHeight());
 
-//            imgView.setImage(image);
             // store image inside field so it can be retrieved later
             this.img = image;
 
@@ -229,11 +226,9 @@ public class Controller  {
 
         Drawable rectangle = new sample.Frame.Rectangle(20, 20, 50, 50);
 
+        // add shape to a series the series of custom shapes added by the user
         model.add(rectangle);
         model.drawPicture(canvas);
-
-
-        // constructs an image that is writable
 
         WritableImage wr = new WritableImage(IMAGE_WIDTH,IMAGE_HEIGHT);
 
@@ -245,7 +240,7 @@ public class Controller  {
 
         img = wr;
 
-        f = new File("OutFinal.png");
+        f = new File("OutFinal.jpg");
 
 
     }
@@ -256,9 +251,7 @@ public class Controller  {
 
         bufferedImage = SwingFXUtils.fromFXImage(writableImage, null);
 
-        ImageIO.write(bufferedImage, "png", new File("OutFinal.png"));
-
-
+        ImageIO.write(bufferedImage, "jpg", new File("OutFinal.jpg"));
 
         BufferedImage bufferedImage1 = new BufferedImage(bufferedImage.getWidth(), bufferedImage.getHeight(),
                 BufferedImage.TYPE_INT_RGB); // do not change alpha stream or something like that, a wise man said
@@ -267,8 +260,5 @@ public class Controller  {
 
         return bufferedImage1;
     }
-
-
-
 
 }
