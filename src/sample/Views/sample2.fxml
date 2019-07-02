@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.canvas.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.control.*?>
@@ -43,12 +45,16 @@
     </VBox>
   </top>
    <left>
-      <VBox prefHeight="327.0" prefWidth="105.0" BorderPane.alignment="CENTER" />
+      <VBox prefHeight="354.0" prefWidth="105.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane prefHeight="361.0" prefWidth="91.0">
+               <children>
+                  <Rectangle fx:id="rect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="14.0" layoutY="34.0" onMouseClicked="#rectAction" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+               </children>
+            </AnchorPane>
+         </children></VBox>
    </left>
    <center>
-  <ImageView fx:id="imgView" fitHeight="233.0" fitWidth="359.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-         <image>
-            <Image url="@../../../drawing.png" />
-         </image></ImageView>
+      <Canvas fx:id="canvas" height="269.0" width="473.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

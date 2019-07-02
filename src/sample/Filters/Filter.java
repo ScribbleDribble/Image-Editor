@@ -38,8 +38,8 @@ public abstract class Filter {
     public void writeOver() {
         try {
 
-            File out = new File("Out.jpg");
-            ImageIO.write(img, "jpg", out);
+            File out = new File("Out.png");
+            ImageIO.write(img, "png", out);
         }
 
         catch(IOException e) {
@@ -49,8 +49,8 @@ public abstract class Filter {
 
     public void saveChanges() throws IOException {
 
-        File outFinal = new File("OutFinal.jpg");
-        ImageIO.write(img, "jpg", outFinal);
+        File outFinal = new File("OutFinal.png");
+        ImageIO.write(img, "png", outFinal);
 
     }
 

@@ -70,7 +70,7 @@ public class ContrastController implements Initializable {
 
             File f = new File("Out.jpg");
 
-            img = new Image(f.toURI().toString());
+            img = new Image(f.toURI().toString(), 300, 200, false, true);
             imgView.setImage(img);
 
 
@@ -80,6 +80,8 @@ public class ContrastController implements Initializable {
     }
 
     public void btnFinaliseAction() throws IOException {
+
+        controller.getGraphicsContext().drawImage(img, 0,0);
         controller.setImage(img);
         controller.setBufferedImage(bufferedImage);
 

@@ -13,26 +13,16 @@ public class Test {
     public static void main(String[] args) throws IOException {
 
 
-        File f = new File("family.jpg");
-
-        LinkedList<Filter> filterList = new LinkedList<>();
+        File f = new File("OutFinal.png");
 
         BufferedImage image = null;
 
         image = ImageIO.read(f);
-        BufferedImage image2 = ImageIO.read(f);
 
-        Filter filter = new Greyscale(image);
-        //Filter filter2 = new Brightness(image2, -30);
-        ColourOver filter3 = new ColourOver(image, "red");
+        Filter filter = new Brightness(image, 0);
 
-        Filter gamma = new Gamma(image, 7);
-
-        gamma.adjustPixels();
-        gamma.saveChanges();
-
-
-
+        filter.adjustPixels();
+        filter.writeOver();
 
 
     }

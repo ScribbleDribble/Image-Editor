@@ -7,23 +7,33 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+import javafx.scene.SnapshotParameters;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
+import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import javafx.stage.Modality;
-import sample.Filters.ColourOver;
-import sample.Filters.Greyscale;
+import javafx.embed.swing.SwingFXUtils;
 
+import javafx.stage.Modality;
+import sample.Frame.Drawable;
+import sample.Model.PictureModel;
 
 import javax.imageio.ImageIO;
-
 import java.awt.image.BufferedImage;
+
 import java.io.File;
 import java.io.IOException;
+
+import static javafx.embed.swing.SwingFXUtils.fromFXImage;
 
 
 public class Controller  {
@@ -48,8 +58,10 @@ public class Controller  {
     MenuItem menuGamma;
 
     @FXML
-    ImageView imgView;
+    Rectangle rect;
 
+    @FXML
+    Canvas canvas;
 
     private Image img = null;
 
@@ -57,7 +69,13 @@ public class Controller  {
 
     private File f;
 
-    private Boolean image_loaded = false;
+    private static final int IMAGE_WIDTH = 300;
+
+    private static final int IMAGE_HEIGHT = 200;
+
+    private GraphicsContext gc;
+
+    private PictureModel model;
 
     public Image getImage(){
         return img;
@@ -67,8 +85,9 @@ public class Controller  {
         return bufferedImage;
     }
 
-
-
+    public GraphicsContext getGraphicsContext() {
+        return gc;
+    }
 
     public void menuOpenFileAction(ActionEvent e){
 
@@ -83,39 +102,45 @@ public class Controller  {
 
         if (selectedFile != null)
         {
-            Image image = new Image(selectedFile.toURI().toString());
+            //Image image = new Image(selectedFile.toURI().toString());
+
+            Image image = new Image(selectedFile.toURI().toString(), 300, 200, false, true);
 
 
+            gc = canvas.getGraphicsContext2D();
 
-            imgView.setImage(image);
+            gc.drawImage(image, 0, 0, image.getWidth(), image.getHeight());
+
+//            imgView.setImage(image);
             // store image inside field so it can be retrieved later
             this.img = image;
 
 
             try {
                 bufferedImage = ImageIO.read(selectedFile);
-                image_loaded = true;
                 f = selectedFile;
-
             }
 
             catch (IOException err)
             {
                 System.out.println(err);
             }
-        }
 
+            //instantiate a new model
+
+            model = new PictureModel();
+        }
 
         else
         {
             System.out.println("file not found");
         }
 
+
     }
 
     public void setImage(Image img) {
         this.img = img;
-        imgView.setImage(img);
     }
 
     public void setBufferedImage(BufferedImage bufferedImage) {
@@ -124,6 +149,7 @@ public class Controller  {
 
     public void setFile(File file) { this.f = file; }
 
+    // initiates loading of stage based on which of the menu items were clicked on
     public void menuItemAction(ActionEvent event) throws IOException {
 
         if (event.getSource() == menuBrightness)
@@ -152,6 +178,7 @@ public class Controller  {
         }
 
     }
+
 
     public void stageLoader(String fxmlFile) throws IOException {
 
@@ -189,16 +216,58 @@ public class Controller  {
             greyscaleController.setImageContext(img, bufferedImage, f, this);
         }
 
-
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
 
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
 
+    }
+
+    // action to be performed once the rectangle shape has been clicked
+    public void rectAction(MouseEvent event) throws IOException {
+
+        Drawable rectangle = new sample.Frame.Rectangle(20, 20, 50, 50);
+
+        model.add(rectangle);
+        model.drawPicture(canvas);
+
+
+        // constructs an image that is writable
+
+        WritableImage wr = new WritableImage(IMAGE_WIDTH,IMAGE_HEIGHT);
+
+        WritableImage writableImage = canvas.snapshot(new SnapshotParameters(), wr);
+
+        bufferedImage = canvasToBufferedImage(writableImage);
+
+        model.savePicture(bufferedImage);
+
+        img = wr;
+
+        f = new File("OutFinal.png");
 
 
     }
+
+
+    public BufferedImage canvasToBufferedImage(WritableImage wr) throws IOException {
+        WritableImage writableImage = canvas.snapshot(new SnapshotParameters(), wr);
+
+        bufferedImage = SwingFXUtils.fromFXImage(writableImage, null);
+
+        ImageIO.write(bufferedImage, "png", new File("OutFinal.png"));
+
+
+
+        BufferedImage bufferedImage1 = new BufferedImage(bufferedImage.getWidth(), bufferedImage.getHeight(),
+                BufferedImage.TYPE_INT_RGB); // do not change alpha stream or something like that, a wise man said
+
+        bufferedImage1.getGraphics().drawImage(bufferedImage, 0, 0, null);
+
+        return bufferedImage1;
+    }
+
 
 
 

@@ -67,8 +67,10 @@ public class BrightnessController implements Initializable {
         this.f = f;
         this.controller = controller;
 
-        File out = new File("Out.jpg");
-        //ImageIO.write(bufferedImage, "jpg", out);
+
+
+        File out = new File("Out.png");
+        ImageIO.write(bufferedImage, "png", out);
     }
 
 
@@ -80,18 +82,19 @@ public class BrightnessController implements Initializable {
             // brightness values on scale of -1 to 1 so we need to normalise value to get an appropriate brightness adjustment
 
             // to reset image so that values dont add to previous image.
-            //UNDER CONSTRUCTION** we need to find a way so that the image is edited based on finalised change
-            // e.g  contrast edited -> brightness is now being edited on top of the resultant contrast change
 
+            System.out.println("hi");
             bufferedImage = ImageIO.read(f);
 
             Filter filter = new Brightness(bufferedImage, (int) (slider.getValue()));
             filter.adjustPixels();
             filter.writeOver();
 
-            File f = new File("Out.jpg");
+            File f = new File("Out.png");
 
-            img = new Image(f.toURI().toString());
+            img = new Image(f.toURI().toString(), 300, 200, false, true);
+
+
             imgView.setImage(img);
 
             this.filter = filter;
@@ -108,10 +111,17 @@ public class BrightnessController implements Initializable {
 
         filter.saveChanges();
 
+        // draw image onto the canvas inside the main scene
+        controller.getGraphicsContext().drawImage(img, 0, 0);
         controller.setImage(img);
+
+        // image view method
+        //controller.setImage(img);
         controller.setBufferedImage(bufferedImage);
 
-        File outFile = new File("OutFinal.jpg");
+
+
+        File outFile = new File("OutFinal.png");
         controller.setFile(outFile);
 
     }
