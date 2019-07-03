@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.canvas.*?>
 <?import java.lang.*?>
@@ -47,14 +48,26 @@
    <left>
       <VBox prefHeight="354.0" prefWidth="105.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane prefHeight="361.0" prefWidth="91.0">
+            <AnchorPane prefHeight="386.0" prefWidth="105.0">
                <children>
-                  <Rectangle fx:id="rect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="14.0" layoutY="34.0" onMouseClicked="#rectAction" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+                  <Rectangle fx:id="rect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="14.0" layoutY="34.0" onMouseClicked="#setShapeRect" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+                  <Circle fill="DODGERBLUE" layoutX="34.0" layoutY="124.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Polygon fill="DODGERBLUE" layoutX="34.0" layoutY="202.0" scaleX="0.5" scaleY="0.5" stroke="BLACK" strokeType="INSIDE">
+                    <points>
+                      <Double fx:value="-50.0" />
+                      <Double fx:value="40.0" />
+                      <Double fx:value="50.0" />
+                      <Double fx:value="40.0" />
+                      <Double fx:value="0.0" />
+                      <Double fx:value="-60.0" />
+                    </points>
+                  </Polygon>
+                  <Text layoutX="14.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TEXT" wrappingWidth="50.0" />
                </children>
             </AnchorPane>
          </children></VBox>
    </left>
    <center>
-      <Canvas fx:id="canvas" height="269.0" width="473.0" BorderPane.alignment="CENTER" />
+      <Canvas fx:id="canvas" height="269.0" onMouseClicked="#place" width="473.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

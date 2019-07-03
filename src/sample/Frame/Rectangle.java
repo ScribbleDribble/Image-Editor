@@ -9,9 +9,9 @@ import sample.Frame.Drawable;
 
 public class Rectangle implements Drawable {
 
-    private int x, y, w, h;
+    private double x, y, w, h;
 
-    public Rectangle(int x, int y, int w, int h) {
+    public Rectangle(double x, double y, double w, double h) {
         this.x = x;
         this.y = y;
         this.w = w;
@@ -23,7 +23,5 @@ public class Rectangle implements Drawable {
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
         gc.fillRect(x, y, w, h);
-
-
     }
 }
