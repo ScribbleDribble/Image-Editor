@@ -290,7 +290,7 @@ public class Controller {
 
             catch (NullPointerException err)
             {
-                System.out.println("User hasn't picked a size yet" + e);
+                System.out.println("User hasn't picked a size yet");
             }
 
 

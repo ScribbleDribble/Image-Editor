@@ -42,13 +42,10 @@ public class Triangle implements Drawable {
 
         calculatePoints();
 
-
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setFill(c);
         gc.fillPolygon(xPoints, yPoints, 3);
 
     }
-
-
 
 }

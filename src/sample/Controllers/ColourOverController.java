@@ -137,8 +137,6 @@ public class ColourOverController {
         File outFile = new File("OutFinal.jpg");
         controller.setFile(outFile);
 
-
-
     }
 
 

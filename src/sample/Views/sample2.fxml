@@ -48,10 +48,10 @@
    <left>
       <VBox prefHeight="354.0" prefWidth="105.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane prefHeight="1063.0" prefWidth="105.0" style="-fx-border-color: black; -fx-background-color: darkgrey;">
+            <AnchorPane minWidth="128.0" prefHeight="1051.0" prefWidth="128.0" style="-fx-border-color: black; -fx-background-color: darkgrey;">
                <children>
-                  <Circle fx:id="circle" fill="DODGERBLUE" layoutX="34.0" layoutY="124.0" onMouseClicked="#setShapeCircle" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Polygon fx:id="triangle" fill="DODGERBLUE" layoutX="34.0" layoutY="202.0" onMouseClicked="#setShapeTriangle" scaleX="0.5" scaleY="0.5" stroke="BLACK" strokeType="INSIDE">
+                  <Circle fx:id="circle" fill="#fcfcfc" layoutX="34.0" layoutY="124.0" onMouseClicked="#setShapeCircle" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Polygon fx:id="triangle" fill="#f7fafc" layoutX="34.0" layoutY="202.0" onMouseClicked="#setShapeTriangle" scaleX="0.5" scaleY="0.5" stroke="BLACK" strokeType="INSIDE">
                     <points>
                       <Double fx:value="-50.0" />
                       <Double fx:value="40.0" />
@@ -62,23 +62,23 @@
                     </points>
                   </Polygon>
                   <Text fx:id="text" layoutX="9.0" layoutY="357.0" onMouseClicked="#setText" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD TEXT" wrappingWidth="50.0" />
-                  <Rectangle fx:id="rect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="14.0" layoutY="34.0" onMouseClicked="#setShapeRect" stroke="BLACK" strokeType="INSIDE" width="40.0" />
-                  <CubicCurve fx:id="paintStart" controlX1="-50.0" controlX2="50.0" controlY1="-100.0" controlY2="100.0" endX="150.0" fill="DODGERBLUE" layoutX="85.0" layoutY="285.0" onMouseClicked="#paint" scaleX="0.5" startX="-150.0" stroke="BLACK" />
-                  <Text layoutX="24.0" layoutY="282.0" onMouseClicked="#paint" strokeType="OUTSIDE" strokeWidth="0.0" text="Paint" wrappingWidth="50.0" />
+                  <Rectangle fx:id="rect" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="40.0" layoutX="14.0" layoutY="34.0" onMouseClicked="#setShapeRect" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+                  <CubicCurve fx:id="paintStart" controlX1="-50.0" controlX2="50.0" controlY1="-100.0" controlY2="100.0" endX="150.0" fill="#2197ff00" layoutX="64.0" layoutY="276.0" onMouseClicked="#paint" scaleX="0.4" startX="-150.0" stroke="BLACK" />
+                  <Text layoutX="14.0" layoutY="281.0" onMouseClicked="#paint" strokeType="OUTSIDE" strokeWidth="0.0" text="Paint" wrappingWidth="50.0" />
                </children>
             </AnchorPane>
          </children></VBox>
    </left>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="1051.0" prefWidth="1738.0" BorderPane.alignment="CENTER">
          <children>
             <Canvas fx:id="canvas" height="279.0" layoutX="667.0" layoutY="290.0" onMouseClicked="#place" width="445.0" />
-            <AnchorPane layoutY="918.0" prefHeight="131.0" prefWidth="1680.0" style="-fx-background-color: darkgrey; -fx-border-color: black;">
+            <AnchorPane layoutY="944.0" prefHeight="105.0" prefWidth="1793.0" style="-fx-background-color: darkgrey; -fx-border-color: black;">
                <children>
-                  <Text layoutX="646.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Size" wrappingWidth="50.0" />
-                  <Text layoutX="840.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Colour" wrappingWidth="50.0" />
-                  <TextField fx:id="sizeField" layoutX="636.0" layoutY="41.0" prefHeight="25.0" prefWidth="60.0" />
-                  <ColorPicker fx:id="cp" layoutX="820.0" layoutY="41.0" />
+                  <Text layoutX="556.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Size" wrappingWidth="50.0" />
+                  <Text layoutX="759.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Colour" wrappingWidth="50.0" />
+                  <TextField fx:id="sizeField" layoutX="590.0" layoutY="14.0" prefHeight="25.0" prefWidth="60.0" />
+                  <ColorPicker fx:id="cp" layoutX="820.0" layoutY="15.0" />
                </children></AnchorPane>
          </children>
       </AnchorPane>
