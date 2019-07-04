@@ -2,6 +2,7 @@ package sample.Frame;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class Triangle implements Drawable {
 
@@ -9,8 +10,10 @@ public class Triangle implements Drawable {
     private double x, y, e, h;
 
     private double xPoints[] = {0,0,0}, yPoints[] = {0,0,0};
+    private Color c;
 
-    public Triangle(double x , double y, double e)
+
+    public Triangle(double x , double y, double e, Color c)
     {
         this.x = x;
         this.y = y;
@@ -18,6 +21,8 @@ public class Triangle implements Drawable {
 
         xPoints[0] = x;
         yPoints[0] = y;
+
+        this.c = c;
 
     }
 
@@ -39,6 +44,7 @@ public class Triangle implements Drawable {
 
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.setFill(c);
         gc.fillPolygon(xPoints, yPoints, 3);
 
     }

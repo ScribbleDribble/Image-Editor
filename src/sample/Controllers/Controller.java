@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
@@ -39,6 +40,7 @@ import java.awt.image.BufferedImage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 
 import static javafx.embed.swing.SwingFXUtils.fromFXImage;
 
@@ -78,6 +80,12 @@ public class Controller {
 
     @FXML
     Canvas canvas;
+
+    //@FXML
+    //javafx.scene.control.ColorPicker colorPicker;
+
+    @FXML
+    ColorPicker cp;
 
     private Image img = null;
 
@@ -244,6 +252,9 @@ public class Controller {
         textIsPressed = true;
     }
 
+
+
+    // decision of which shape and then placement
     public void place() {
 
         canvas.setOnMouseClicked(e -> {
@@ -251,18 +262,19 @@ public class Controller {
             double y = e.getY();
 
             if (rectangleIsPressed) {
-                Drawable r = new Rectangle(x, y, 50, 50);
+                Drawable r = new Rectangle(x, y, 50, 50, cp.getValue());
                 model.add(r);
             }
             else if (circleIsPressed) {
-                Drawable c = new Circle(x, y, 50);
+                Drawable c = new Circle(x, y, 50, cp.getValue());
                 model.add(c);
             }
             else if (triangleIsPressed) {
-                Drawable t = new Triangle(x, y, 30);
+                Drawable t = new Triangle(x, y, 30, cp.getValue());
                 model.add(t);
             }
             else if (textIsPressed) {
+
                 Drawable text = new Text("tbd", x, y);
                 model.add(text);
             }
@@ -306,6 +318,5 @@ public class Controller {
 
         return bufferedImage1;
     }
-
 
 }

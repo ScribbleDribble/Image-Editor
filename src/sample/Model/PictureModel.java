@@ -29,11 +29,6 @@ public class PictureModel {
         }
     }
 
-    public void printList() {
-        System.out.println(collection);
-    }
-
-
     public void savePicture(BufferedImage bufferedImage) throws IOException {
 
         File outFinal = new File("OutFinal.jpg");

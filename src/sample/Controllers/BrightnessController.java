@@ -70,11 +70,6 @@ public class BrightnessController implements Initializable {
         System.out.println(bufferedImage.toString());
 
 
-        if (bufferedImage == null)
-        {
-            throw new IllegalArgumentException("buffered image is null");
-        }
-
         File out = new File("Out.jpg");
         ImageIO.write(bufferedImage, "jpg", out);
     }
