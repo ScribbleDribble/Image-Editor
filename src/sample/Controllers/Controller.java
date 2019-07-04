@@ -1,6 +1,7 @@
 package sample.Controllers;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -19,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
 import sample.Frame.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -26,7 +28,6 @@ import javafx.stage.Stage;
 import javafx.embed.swing.SwingFXUtils;
 
 import javafx.stage.Modality;
-import sample.Events.RectanglePlacement;
 import sample.Frame.Circle;
 import sample.Frame.Drawable;
 import sample.Frame.Text;
@@ -64,7 +65,16 @@ public class Controller {
     MenuItem menuGamma;
 
     @FXML
-    Rectangle rect;
+    javafx.scene.shape.Rectangle rect;
+
+    @FXML
+    javafx.scene.shape.Circle circle;
+
+    @FXML
+    javafx.scene.text.Text text;
+
+    @FXML
+    Polygon triangle;
 
     @FXML
     Canvas canvas;
@@ -117,6 +127,9 @@ public class Controller {
 
             gc = canvas.getGraphicsContext2D();
 
+
+
+            gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
             gc.drawImage(image, 0, 0, image.getWidth(), image.getHeight());
 
             // store image inside field so it can be retrieved later
@@ -203,107 +216,89 @@ public class Controller {
 
     // action to be performed once the rectangle shape has been clicked
 
-    public void setShapeRect() {
 
-        rectangleIsPressed = true;
+    private void resetShapes() {
+        rectangleIsPressed = false;
+        triangleIsPressed = false;
         circleIsPressed = false;
         textIsPressed = false;
-        triangleIsPressed = false;
-
     }
 
-    @FXML
-    public void place() throws IOException {
+    public void setShapeRect() {
+        resetShapes();
+        rectangleIsPressed = true;
+    }
+
+    public void setShapeTriangle() {
+        resetShapes();
+        triangleIsPressed = true;
+    }
+
+    public void setShapeCircle() {
+        resetShapes();
+        circleIsPressed = true;
+    }
+
+    public void setText() {
+        resetShapes();
+        textIsPressed = true;
+    }
+
+    public void place() {
 
         canvas.setOnMouseClicked(e -> {
             double x = e.getX();
             double y = e.getY();
 
             if (rectangleIsPressed) {
-                Rectangle r = new Rectangle(x, y, 50, 50);
+                Drawable r = new Rectangle(x, y, 50, 50);
                 model.add(r);
-            } else if (circleIsPressed) {
-                Circle c = new Circle(x, y, 50);
+            }
+            else if (circleIsPressed) {
+                Drawable c = new Circle(x, y, 50);
                 model.add(c);
-            } else if (triangleIsPressed) {
-                Triangle t = new Triangle(x, y, 30);
+            }
+            else if (triangleIsPressed) {
+                Drawable t = new Triangle(x, y, 30);
                 model.add(t);
-            } else if (textIsPressed) {
-                Text text = new Text("tbd", x, y);
+            }
+            else if (textIsPressed) {
+                Drawable text = new Text("tbd", x, y);
                 model.add(text);
             }
-        });
 
-        saveCanvas();
-    }
-
-
-    public void saveCanvas() throws IOException {
-/*
-        canvas.setOnMouseClicked(e -> {
-            //double x =  event.getSceneX() * 0.57;
-            //double y = (int) event.getSceneY() * 0.59;
-
-            double x = event.getX();
-            double x2 = event.getSceneX();
-            double x3 = event.getScreenX();
-            double y = event.getScreenY();
-
-            System.out.println(x);
-            System.out.println(x2);
-            System.out.println(x3);
-            System.out.println(y + "\n----------------");
-
-            Drawable rectangle = new sample.Frame.Rectangle(200, 150, 50, 50);
-
-            model.add(rectangle);
             model.drawPicture(canvas);
 
+            // take a snapshot of the canvas and write it to a writable image
+            WritableImage wr = new WritableImage(IMAGE_WIDTH, IMAGE_HEIGHT);
+            WritableImage writableImage = canvas.snapshot(new SnapshotParameters(), wr);
+
             try {
+                this.bufferedImage = canvasToBufferedImage(writableImage);
                 model.savePicture(bufferedImage);
             }
+
             catch (IOException err)
             {
                 System.out.println(err);
             }
 
+            // set img and f to the below so that the correct data can be sent to the other controllers
+            img = writableImage;
+            f = new File("OutFinal.jpg");
 
         });
-*/
-        //Drawable rectangle = new sample.Frame.Rectangle(20, 20, 50, 50);
-
-        // add shape to a series the series of custom shapes added by the user
-
-        /*
-        model.add(rectangle);
-        model.drawPicture(canvas);
-        */
-
-        model.savePicture(bufferedImage);
-        WritableImage wr = new WritableImage(IMAGE_WIDTH, IMAGE_HEIGHT);
-
-        WritableImage writableImage = canvas.snapshot(new SnapshotParameters(), wr);
-
-        bufferedImage = canvasToBufferedImage(writableImage);
-
-        //model.savePicture(bufferedImage);
-
-        img = wr;
-
-        f = new File("OutFinal.jpg");
-
 
     }
 
-
-    public BufferedImage canvasToBufferedImage(WritableImage wr) throws IOException {
-        WritableImage writableImage = canvas.snapshot(new SnapshotParameters(), wr);
+    private BufferedImage canvasToBufferedImage(WritableImage writableImage) throws IOException {
+        //WritableImage writableImage = canvas.snapshot(new SnapshotParameters(), wr);
 
         bufferedImage = SwingFXUtils.fromFXImage(writableImage, null);
 
+        //ImageIO.write(bufferedImage, "png", new File("OutFinal.png"));
 
-        ImageIO.write(bufferedImage, "png", new File("OutFinal.png"));
-
+        // adjust to right image type
         BufferedImage bufferedImage1 = new BufferedImage(bufferedImage.getWidth(), bufferedImage.getHeight(),
                 BufferedImage.TYPE_INT_RGB); // do not change alpha stream or something like that, a wise man said
 

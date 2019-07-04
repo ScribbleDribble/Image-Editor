@@ -67,7 +67,13 @@ public class BrightnessController implements Initializable {
         this.f = f;
         this.controller = controller;
 
+        System.out.println(bufferedImage.toString());
 
+
+        if (bufferedImage == null)
+        {
+            throw new IllegalArgumentException("buffered image is null");
+        }
 
         File out = new File("Out.jpg");
         ImageIO.write(bufferedImage, "jpg", out);
@@ -79,11 +85,13 @@ public class BrightnessController implements Initializable {
     public void btnAdjustBrightnessAction(ActionEvent event) throws IOException {
 
         if (bufferedImage != null) {
+
             // brightness values on scale of -1 to 1 so we need to normalise value to get an appropriate brightness adjustment
 
             // to reset image so that values dont add to previous image.
 
             bufferedImage = ImageIO.read(f);
+
 
             Filter filter = new Brightness(bufferedImage, (int) (slider.getValue()));
             filter.adjustPixels();
@@ -92,7 +100,6 @@ public class BrightnessController implements Initializable {
             File f = new File("Out.jpg");
 
             img = new Image(f.toURI().toString(), 300, 200, false, true);
-
 
             imgView.setImage(img);
 

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<BorderPane id="BorderPane" fx:id="home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controllers.Controller">
+<BorderPane id="BorderPane" fx:id="home" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controllers.Controller">
   <top>
     <VBox>
       <children>
@@ -50,9 +50,8 @@
          <children>
             <AnchorPane prefHeight="386.0" prefWidth="105.0">
                <children>
-                  <Rectangle fx:id="rect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="14.0" layoutY="34.0" onMouseClicked="#setShapeRect" stroke="BLACK" strokeType="INSIDE" width="40.0" />
-                  <Circle fill="DODGERBLUE" layoutX="34.0" layoutY="124.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Polygon fill="DODGERBLUE" layoutX="34.0" layoutY="202.0" scaleX="0.5" scaleY="0.5" stroke="BLACK" strokeType="INSIDE">
+                  <Circle fx:id="circle" fill="DODGERBLUE" layoutX="34.0" layoutY="124.0" onMouseClicked="#setShapeCircle" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Polygon fx:id="triangle" fill="DODGERBLUE" layoutX="34.0" layoutY="202.0" onMouseClicked="#setShapeTriangle" scaleX="0.5" scaleY="0.5" stroke="BLACK" strokeType="INSIDE">
                     <points>
                       <Double fx:value="-50.0" />
                       <Double fx:value="40.0" />
@@ -62,12 +61,17 @@
                       <Double fx:value="-60.0" />
                     </points>
                   </Polygon>
-                  <Text layoutX="14.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TEXT" wrappingWidth="50.0" />
+                  <Text fx:id="text" layoutX="14.0" layoutY="257.0" onMouseClicked="#setText" strokeType="OUTSIDE" strokeWidth="0.0" text="TEXT" wrappingWidth="50.0" />
+                  <Rectangle fx:id="rect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="40.0" layoutX="14.0" layoutY="34.0" onMouseClicked="#setShapeRect" stroke="BLACK" strokeType="INSIDE" width="40.0" />
                </children>
             </AnchorPane>
          </children></VBox>
    </left>
    <center>
-      <Canvas fx:id="canvas" height="269.0" onMouseClicked="#place" width="473.0" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Canvas fx:id="canvas" height="300.0" layoutX="159.0" layoutY="138.0" onMouseClicked="#place" width="445.0" />
+         </children>
+      </AnchorPane>
    </center>
 </BorderPane>

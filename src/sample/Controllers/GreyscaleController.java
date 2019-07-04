@@ -82,9 +82,17 @@ public class GreyscaleController {
         controller.setBufferedImage(bufferedImage);
 
         // save resultant change to the final file and send file to main controller so it can now be loaded everywhere else
-        filter.saveChanges();
-        File outFile = new File("OutFinal.jpg");
-        controller.setFile(outFile);
+
+        try {
+            filter.saveChanges();
+            File outFile = new File("OutFinal.jpg");
+            controller.setFile(outFile);
+        }
+
+        catch (NullPointerException enull)
+        {
+            System.out.println("Alert user no changes have been made?");
+        }
 
     }
 
