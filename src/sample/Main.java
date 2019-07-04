@@ -22,7 +22,7 @@ public class Main extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("Views/sample2.fxml"));
 
-        primaryStage.setTitle("Image Edit 0.2");
+        primaryStage.setTitle("Image Edit 1.0");
         primaryStage.setScene(new Scene(root, 1920, 1080));
         primaryStage.show();
 

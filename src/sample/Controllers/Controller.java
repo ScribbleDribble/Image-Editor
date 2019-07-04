@@ -16,11 +16,13 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.Polygon;
 import sample.Frame.*;
 import javafx.stage.FileChooser;
@@ -87,6 +89,12 @@ public class Controller {
     @FXML
     ColorPicker cp;
 
+    @FXML
+    TextField sizeField;
+
+    @FXML
+    CubicCurve paintStart;
+
     private Image img = null;
 
     private BufferedImage bufferedImage = null;
@@ -105,6 +113,7 @@ public class Controller {
     private Boolean triangleIsPressed = false;
     private Boolean circleIsPressed = false;
     private Boolean textIsPressed = false;
+
 
     public Image getImage() {
         return img;
@@ -253,6 +262,41 @@ public class Controller {
     }
 
 
+
+    public void paint() {
+
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        resetShapes();
+
+        canvas.setOnMouseDragged(e -> {
+
+            try {
+                double size = Double.parseDouble(sizeField.getText());
+
+                // if brush size is too big
+
+                if (size > IMAGE_HEIGHT / 4 || size > IMAGE_WIDTH / 4  )
+                {
+                    size = IMAGE_HEIGHT/4;
+                }
+
+                double x = e.getX();
+                double y = e.getY();
+
+                gc.setFill(cp.getValue());
+                gc.fillRect(x, y, size, size);
+
+            }
+
+            catch (NullPointerException err)
+            {
+                System.out.println("User hasn't picked a size yet" + e);
+            }
+
+
+        });
+
+    }
 
     // decision of which shape and then placement
     public void place() {
