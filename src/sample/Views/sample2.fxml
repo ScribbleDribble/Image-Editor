@@ -77,7 +77,7 @@
    <center>
       <AnchorPane prefHeight="955.0" prefWidth="2041.0" BorderPane.alignment="CENTER">
          <children>
-            <Canvas fx:id="canvas" height="279.0" layoutX="667.0" layoutY="290.0" onMouseClicked="#place" width="445.0" />
+            <Canvas fx:id="canvas" height="550.0" layoutX="671.0" layoutY="250.0" onMouseClicked="#place" width="550.0" />
             <AnchorPane layoutX="-1.0" layoutY="947.0" prefHeight="103.0" prefWidth="1794.0" style="-fx-background-color: darkgrey; -fx-border-color: black;">
                <children>
                   <Text layoutX="556.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Size" wrappingWidth="50.0" />

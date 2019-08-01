@@ -7,7 +7,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import sample.Filters.EdgeDetection;
 import sample.Filters.Filter;
-import sample.Filters.Gamma;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -68,12 +67,22 @@ public class EdgeDetectionController {
         }
 
         File f = new File("Out.jpg");
-        img = new Image(f.toURI().toString(), 300, 200, false, true);
+        img = new Image(f.toURI().toString(), 550, 550, true, true);
         imgView.setImage(img);
 
     }
 
     public void btnFinaliseAction() throws IOException {
+
+        // clear canvas
+        controller.getGraphicsContext().clearRect(
+                0,
+                0,
+                controller.getCanvas().getWidth(),
+                controller.canvas.getHeight()
+        );
+
+        //gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         controller.getGraphicsContext().drawImage(img, 0, 0);
 

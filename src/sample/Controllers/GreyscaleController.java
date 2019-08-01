@@ -64,7 +64,7 @@ public class GreyscaleController {
 
             File f = new File("Out.jpg");
 
-            img = new Image(f.toURI().toString(), 300, 200, false, true);
+            img = new Image(f.toURI().toString(), 300, 200, true, true);
             imgView.setImage(img);
 
 
@@ -76,6 +76,14 @@ public class GreyscaleController {
 
 
     public void btnFinaliseAction() throws IOException {
+
+        // clear canvas
+        controller.getGraphicsContext().clearRect(
+                0,
+                0,
+                controller.getCanvas().getWidth(),
+                controller.canvas.getHeight()
+        );
 
         controller.getGraphicsContext().drawImage(img, 0, 0);
         controller.setImage(img);

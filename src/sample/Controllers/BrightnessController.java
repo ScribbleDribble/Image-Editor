@@ -94,7 +94,7 @@ public class BrightnessController implements Initializable {
 
             File f = new File("Out.jpg");
 
-            img = new Image(f.toURI().toString(), 300, 200, false, true);
+            img = new Image(f.toURI().toString(), 550, 550, true, true);
 
             imgView.setImage(img);
 
@@ -109,6 +109,14 @@ public class BrightnessController implements Initializable {
 
 
     public void btnFinaliseAction() throws IOException{
+
+        // clear canvas
+        controller.getGraphicsContext().clearRect(
+                0,
+                0,
+                controller.getCanvas().getWidth(),
+                controller.canvas.getHeight()
+        );
 
         filter.saveChanges();
 

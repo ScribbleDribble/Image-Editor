@@ -24,6 +24,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import sample.Filters.EdgeDetection;
 import sample.Frame.*;
 import javafx.stage.FileChooser;
@@ -109,9 +110,12 @@ public class Controller {
 
     private File f;
 
-    private static final int IMAGE_WIDTH = 300;
+    private static final int IMAGE_WIDTH = 550;
 
-    private static final int IMAGE_HEIGHT = 200;
+    private static final int IMAGE_HEIGHT = 550;
+
+    private double img_width;
+    private double img_height;
 
     private static final int LINE_POINTS = 4;
 
@@ -140,6 +144,10 @@ public class Controller {
         return gc;
     }
 
+    public Canvas getCanvas() {
+        return this.canvas;
+    }
+
     public void menuOpenFileAction(ActionEvent e) {
 
         File initialDir = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Pictures");
@@ -153,14 +161,21 @@ public class Controller {
         File selectedFile = fc.showOpenDialog(null);
 
         if (selectedFile != null) {
-            Image image = new Image(selectedFile.toURI().toString(), IMAGE_WIDTH, IMAGE_HEIGHT, false, true);
 
+
+            Image image = new Image(selectedFile.toURI().toString(), IMAGE_WIDTH, IMAGE_HEIGHT, true, true);
+
+            //testing
+            img_height =  image.getHeight();
+            img_width = image.getWidth();
+            //
             gc = canvas.getGraphicsContext2D();
-
-
 
             gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
             gc.drawImage(image, 0, 0, image.getWidth(), image.getHeight());
+
+            //canvas.setWidth(IMAGE_WIDTH);
+            //canvas.setHeight(IMAGE_HEIGHT);
 
             // store image inside field so it can be retrieved later
             this.img = image;
@@ -168,6 +183,7 @@ public class Controller {
 
             try {
                 bufferedImage = ImageIO.read(selectedFile);
+
                 f = selectedFile;
             } catch (IOException err) {
                 System.out.println(err);
@@ -340,8 +356,11 @@ public class Controller {
             double x = e.getX();
             double y = e.getY();
 
+            int shape_size = Integer.parseInt(sizeField.getText());
+
+
             if (rectangleIsPressed) {
-                Drawable r = new Rectangle(x, y, 50, 50, cp.getValue());
+                Drawable r = new Rectangle(x, y, shape_size, cp.getValue());
                 model.add(r);
             }
             else if (circleIsPressed) {
@@ -379,7 +398,7 @@ public class Controller {
                         arr[j--] = pointStorage.pop();
                     }
 
-                    Drawable line = new sample.Frame.Line(arr[0], arr[1], arr[2], arr[3], line_width);
+                    Drawable line = new sample.Frame.Line(arr[0], arr[1], arr[2], arr[3], line_width, cp.getValue());
 
                     model.add(line);
                 }
@@ -393,8 +412,9 @@ public class Controller {
 
 
             // take a snapshot of the canvas and write it to a writable image
-            WritableImage wr = new WritableImage(IMAGE_WIDTH, IMAGE_HEIGHT);
+            WritableImage wr = new WritableImage((int)img_width, (int)img_height);
             WritableImage writableImage = canvas.snapshot(new SnapshotParameters(), wr);
+
 
             try {
                 this.bufferedImage = canvasToBufferedImage(writableImage);

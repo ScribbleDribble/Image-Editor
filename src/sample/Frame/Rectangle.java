@@ -8,14 +8,14 @@ import javafx.scene.canvas.Canvas;
 
 public class Rectangle implements Drawable {
 
-    private double x, y, w, h;
+    private double x, y;
+    int size;
     Color c;
 
-    public Rectangle(double x, double y, double w, double h, Color c) {
+    public Rectangle(double x, double y, int size, Color c) {
         this.x = x;
         this.y = y;
-        this.w = w;
-        this.h = h;
+        this.size = size;
 
         this.c = c;
     }
@@ -25,6 +25,6 @@ public class Rectangle implements Drawable {
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
         gc.setFill(c);
-        gc.fillRect(x, y, w, h);
+        gc.fillRect(x, y, size, size);
     }
 }
