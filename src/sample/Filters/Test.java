@@ -13,17 +13,16 @@ public class Test {
     public static void main(String[] args) throws IOException {
 
 
-        File f = new File("OutFinal.png");
+        File f = new File("family.jpg");
 
-        BufferedImage image = null;
+        BufferedImage image = ImageIO.read(f);
 
-        image = ImageIO.read(f);
 
-        Filter filter = new Brightness(image, 0);
+        //Filter filter = new Brightness(image, 0);
 
+        Filter filter = new EdgeDetection("canny", f, image);
         filter.adjustPixels();
-        filter.writeOver();
-
+        filter.saveChanges();
 
     }
 }

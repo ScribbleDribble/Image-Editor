@@ -1,0 +1,14 @@
+Stuff to do
+
+Bugs:
+UNRESOLVED
+    - first point when creating a line isn't recognised. You will have to click on two more points for a line creation
+
+RESOLVED
+    - when using a filter it changes the size and look (calling the image constructor with different preferences
+    - to what we have been doing opening the file is maybe causing this.
+
+Other:
+UNHANDLED ERRORS
+    - Finalising edge detection filter generates a a NullPointerException
+    - When the user selects a filter in the menu without previously opening an image generates an error. Can easily be handled

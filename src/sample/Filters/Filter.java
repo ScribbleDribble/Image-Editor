@@ -34,7 +34,7 @@ public abstract class Filter {
     // algorithm for a specific filter, to be implemented
     public void adjustPixels() {}
 
-    // writes image adjustment on output file. To be done each time the user wants to preview an image
+    // writes image adjustment onto a file. To be done each time the user wants to preview an image
     public void writeOver() {
         try {
 
@@ -48,11 +48,8 @@ public abstract class Filter {
     }
 
     public void saveChanges() throws IOException {
-
         File outFinal = new File("OutFinal.jpg");
         ImageIO.write(img, "jpg", outFinal);
-
     }
-
 
 }

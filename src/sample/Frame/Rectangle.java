@@ -4,7 +4,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 import javafx.scene.canvas.Canvas;
-import sample.Frame.Drawable;
 
 
 public class Rectangle implements Drawable {

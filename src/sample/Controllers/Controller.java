@@ -20,10 +20,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
+
 import javafx.scene.shape.CubicCurve;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
+import sample.Filters.EdgeDetection;
 import sample.Frame.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -31,6 +32,8 @@ import javafx.stage.Stage;
 import javafx.embed.swing.SwingFXUtils;
 
 import javafx.stage.Modality;
+
+import sample.*;
 import sample.Frame.Circle;
 import sample.Frame.Drawable;
 import sample.Frame.Text;
@@ -67,6 +70,8 @@ public class Controller {
     MenuItem menuGreyscale;
     @FXML
     MenuItem menuGamma;
+    @FXML
+    MenuItem menuEdgeDetection;
 
     @FXML
     javafx.scene.shape.Rectangle rect;
@@ -95,6 +100,9 @@ public class Controller {
     @FXML
     CubicCurve paintStart;
 
+    @FXML
+    Line line;
+
     private Image img = null;
 
     private BufferedImage bufferedImage = null;
@@ -105,15 +113,20 @@ public class Controller {
 
     private static final int IMAGE_HEIGHT = 200;
 
+    private static final int LINE_POINTS = 4;
+
+    private int line_points = 2;
+
     private GraphicsContext gc;
 
     private PictureModel model;
+    private PointStorage pointStorage;
 
     private Boolean rectangleIsPressed = false;
     private Boolean triangleIsPressed = false;
     private Boolean circleIsPressed = false;
     private Boolean textIsPressed = false;
-
+    private Boolean lineIsPressed = false;
 
     public Image getImage() {
         return img;
@@ -163,7 +176,12 @@ public class Controller {
             //instantiate a new model
 
             model = new PictureModel();
+
+
+            pointStorage = new PointStorage();
+
         } else {
+            // TODO display warning msg or image to user
             System.out.println("file not found");
         }
 
@@ -197,6 +215,12 @@ public class Controller {
             stageLoader("../Views/greyscaleScene.fxml");
         }
 
+        else if (event.getSource() == menuEdgeDetection)
+        {
+            stageLoader("../Views/EdgeDetection.fxml");
+        }
+
+
     }
 
 
@@ -223,6 +247,12 @@ public class Controller {
             greyscaleController.setImageContext(img, bufferedImage, f, this);
         }
 
+        else if (fxmlFile == "../Views/EdgeDetection.fxml")
+        {
+            EdgeDetectionController edgeDetection = loader.getController();
+            edgeDetection.setImageContext(img, bufferedImage, f, this);
+        }
+
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
 
@@ -233,12 +263,13 @@ public class Controller {
 
     // action to be performed once the rectangle shape has been clicked
 
-
+    // use enum instead and loop through all to set as false?
     private void resetShapes() {
         rectangleIsPressed = false;
         triangleIsPressed = false;
         circleIsPressed = false;
         textIsPressed = false;
+        lineIsPressed = false;
     }
 
     public void setShapeRect() {
@@ -254,6 +285,11 @@ public class Controller {
     public void setShapeCircle() {
         resetShapes();
         circleIsPressed = true;
+    }
+
+    public void setLine() {
+        resetShapes();
+        lineIsPressed = true;
     }
 
     public void setText() {
@@ -285,7 +321,6 @@ public class Controller {
 
                 gc.setFill(cp.getValue());
                 gc.fillRect(x, y, size, size);
-
             }
 
             catch (NullPointerException err)
@@ -293,10 +328,10 @@ public class Controller {
                 System.out.println("User hasn't picked a size yet");
             }
 
-
         });
 
     }
+
 
     // decision of which shape and then placement
     public void place() {
@@ -323,7 +358,39 @@ public class Controller {
                 model.add(text);
             }
 
+            else if (lineIsPressed)
+            {
+
+                if (pointStorage.size() != 4)
+                {
+                    pointStorage.pushXY(e.getX(), e.getY());
+                }
+
+                if ( pointStorage.size() == LINE_POINTS )
+                {
+
+                    int line_width = Integer.parseInt(sizeField.getText());
+
+                    double arr[] = {0, 0, 0, 0};
+                    int j = 3;
+
+                    for (int i = 0; i < 4; i++)
+                    {
+                        arr[j--] = pointStorage.pop();
+                    }
+
+                    Drawable line = new sample.Frame.Line(arr[0], arr[1], arr[2], arr[3], line_width);
+
+                    model.add(line);
+                }
+
+
+
+            }
+
             model.drawPicture(canvas);
+
+
 
             // take a snapshot of the canvas and write it to a writable image
             WritableImage wr = new WritableImage(IMAGE_WIDTH, IMAGE_HEIGHT);
@@ -348,11 +415,8 @@ public class Controller {
     }
 
     private BufferedImage canvasToBufferedImage(WritableImage writableImage) throws IOException {
-        //WritableImage writableImage = canvas.snapshot(new SnapshotParameters(), wr);
 
         bufferedImage = SwingFXUtils.fromFXImage(writableImage, null);
-
-        //ImageIO.write(bufferedImage, "png", new File("OutFinal.png"));
 
         // adjust to right image type
         BufferedImage bufferedImage1 = new BufferedImage(bufferedImage.getWidth(), bufferedImage.getHeight(),

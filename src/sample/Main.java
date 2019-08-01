@@ -8,9 +8,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
+
 /**
  * @Author Micah Edwards
- *
  */
 
 public class Main extends Application {
