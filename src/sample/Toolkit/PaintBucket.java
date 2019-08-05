@@ -2,8 +2,7 @@ package sample.Toolkit;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.lang.reflect.Array;
-import java.lang.reflect.Type;
+
 import java.util.ArrayDeque;
 
 public class PaintBucket {
@@ -13,32 +12,7 @@ public class PaintBucket {
     public PaintBucket(BufferedImage bufferedImage) {
         this.bufferedImage = bufferedImage;
     }
-/*
-    public int floodFill(int x, int y, int oldRGB, int newRGB) {
 
-        System.out.println("x: " + x + " y: " + y);
-
-
-        if ((x >= bufferedImage.getWidth() || x < 0)
-                || (y >= bufferedImage.getHeight() || y < 0))
-            return 0;
-
-        else if (bufferedImage.getRGB(x,y) ==  oldRGB)
-        {
-            bufferedImage.setRGB(x, y, newRGB);
-            return 1;
-        }
-
-        floodFill(x+1, y, oldRGB, newRGB);
-        floodFill(x-1, y, oldRGB, newRGB);
-        floodFill(x, y-1, oldRGB, newRGB);
-        floodFill(x, y+1, oldRGB, newRGB);
-
-        return 1;
-    }
-
-
-*/
     public boolean isOld(int x, int y, int oldRGB) {
 
         Color pixelColor = new Color(bufferedImage.getRGB(x, y));

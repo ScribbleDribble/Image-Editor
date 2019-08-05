@@ -1,9 +1,8 @@
 package sample.Controllers;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
@@ -25,8 +24,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
-import sample.Filters.EdgeDetection;
+
 import sample.Frame.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -35,7 +33,6 @@ import javafx.embed.swing.SwingFXUtils;
 
 import javafx.stage.Modality;
 
-import sample.*;
 import sample.Frame.Circle;
 import sample.Frame.Drawable;
 import sample.Frame.Text;
@@ -49,11 +46,6 @@ import java.io.File;
 import java.io.IOException;
 
 import sample.Toolkit.PaintBucket;
-
-import java.util.Scanner;
-
-import static javafx.embed.swing.SwingFXUtils.fromFXImage;
-
 
 public class Controller {
 
@@ -139,6 +131,10 @@ public class Controller {
     private Boolean textIsPressed = false;
     private Boolean lineIsPressed = false;
     private Boolean fillIsPressed = false;
+
+    // let canvasDraw = true be fault value
+    // this variable here is to differentiate between drawing on canvas and writing straight to buffered image
+    private Boolean canvasDraw = true;
 
     public Image getImage() {
         return img;
@@ -419,7 +415,6 @@ public class Controller {
                 }
 
 
-
             }
 
             else if (fillIsPressed)
@@ -427,11 +422,9 @@ public class Controller {
 
                 Color newCol = cp.getValue();
 
-
                 double red, green, blue;
 
                 red =  cp.getValue().getRed() * 250;
-                System.out.println("red value inside cp colour");
                 green = newCol.getGreen() * 250;
                 blue =  newCol.getBlue() * 250;
 
@@ -452,33 +445,49 @@ public class Controller {
                 catch(IOException e2) {
                     System.out.println(e2);
                 }
+                try {
+                    img = new Image(f.toURI().toString(), 550, 550, true, true);
+                    gc.clearRect(
+                            0,
+                            0,
+                            canvas.getWidth(),
+                            canvas.getHeight()
+                    );
+
+                    gc.drawImage(img, 0, 0);
+
+                    canvasDraw = false;
+                }
+
+                catch (Exception e3)
+                {
+                    System.out.println(e3);
+                }
 
             }
 
-
-            model.drawPicture(canvas);
-
-
-
-            // take a snapshot of the canvas and write it to a writable image
-            WritableImage wr = new WritableImage((int)img_width, (int)img_height);
-            WritableImage writableImage = canvas.snapshot(new SnapshotParameters(), wr);
+            if (canvasDraw) {
+                model.drawPicture(canvas);
 
 
-            try {
-                this.bufferedImage = canvasToBufferedImage(writableImage);
-                model.savePicture(bufferedImage);
+                // take a snapshot of the canvas and write it to a writable image
+                WritableImage wr = new WritableImage((int) img_width, (int) img_height);
+                WritableImage writableImage = canvas.snapshot(new SnapshotParameters(), wr);
+
+
+                try {
+                    this.bufferedImage = canvasToBufferedImage(writableImage);
+                    model.savePicture(bufferedImage);
+                } catch (IOException err) {
+                    System.out.println(err);
+                }
+
+                // set img and f to the below so that the correct data can be sent to the other controllers
+                img = writableImage;
+                f = new File("OutFinal.jpg");
             }
-
-            catch (IOException err)
-            {
-                System.out.println(err);
-            }
-
-            // set img and f to the below so that the correct data can be sent to the other controllers
-            img = writableImage;
-            f = new File("OutFinal.jpg");
-
+            canvasDraw = true;
+            //fillIsPressed = false;
         });
 
     }

@@ -2,9 +2,12 @@ Stuff to do
 
 Bugs:
 UNRESOLVED
-    - first point when creating a line isn't recognised. You will have to click on two more points for a line creation
-    - when drawing stuff on the canvas, it downscales image size to the size of the canvas
-	Possible fix: change canvas size back to file size when saving the image. 
+    - First point when creating a line isn't recognised. You will have to click on two more points for a line creation
+    - When drawing stuff on the canvas, it downscales image size to the size of the canvas
+	Possible fix: change canvas size back to file size when saving the image.
+	- If you fill a shape and then draw a shape with a different colour, the former reverts back to its original colour
+	- By double clicking on the canvas once fill has been activated, it will crash the program :( You must click once.
+
 
 
 Other:
