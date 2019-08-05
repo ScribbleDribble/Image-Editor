@@ -67,9 +67,6 @@ public class BrightnessController implements Initializable {
         this.f = f;
         this.controller = controller;
 
-        System.out.println(bufferedImage.toString());
-
-
         File out = new File("Out.jpg");
         ImageIO.write(bufferedImage, "jpg", out);
     }
@@ -92,8 +89,8 @@ public class BrightnessController implements Initializable {
             filter.adjustPixels();
             filter.writeOver();
 
+            // retrieve output image and set it as preview image
             File f = new File("Out.jpg");
-
             img = new Image(f.toURI().toString(), 550, 550, true, true);
 
             imgView.setImage(img);

@@ -2,6 +2,9 @@ package sample.Frame;
 
 import java.util.ArrayDeque;
 
+/***
+ * Used to keep track of points that form shapes, between multiple function calls
+ */
 public class PointStorage {
 
     private ArrayDeque<Double> points = new ArrayDeque<>();

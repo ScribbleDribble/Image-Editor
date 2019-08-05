@@ -22,7 +22,6 @@ public class Line implements Drawable{
     @Override
     public void draw(Canvas canvas) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.setFill(color);
         gc.setLineWidth(line_width);
         gc.strokeLine(x1, y1, x2, y2);
     }

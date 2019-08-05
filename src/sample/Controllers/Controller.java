@@ -21,6 +21,7 @@ import javafx.scene.image.Image;
 
 import javafx.scene.image.WritableImage;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
@@ -46,6 +47,9 @@ import java.awt.image.BufferedImage;
 
 import java.io.File;
 import java.io.IOException;
+
+import sample.Toolkit.PaintBucket;
+
 import java.util.Scanner;
 
 import static javafx.embed.swing.SwingFXUtils.fromFXImage;
@@ -104,6 +108,9 @@ public class Controller {
     @FXML
     Line line;
 
+    @FXML
+    javafx.scene.text.Text fill;
+
     private Image img = null;
 
     private BufferedImage bufferedImage = null;
@@ -131,6 +138,7 @@ public class Controller {
     private Boolean circleIsPressed = false;
     private Boolean textIsPressed = false;
     private Boolean lineIsPressed = false;
+    private Boolean fillIsPressed = false;
 
     public Image getImage() {
         return img;
@@ -279,13 +287,14 @@ public class Controller {
 
     // action to be performed once the rectangle shape has been clicked
 
-    // use enum instead and loop through all to set as false?
+    // use array instead and loop through all to set as false?
     private void resetShapes() {
         rectangleIsPressed = false;
         triangleIsPressed = false;
         circleIsPressed = false;
         textIsPressed = false;
         lineIsPressed = false;
+        fillIsPressed = false;
     }
 
     public void setShapeRect() {
@@ -311,6 +320,11 @@ public class Controller {
     public void setText() {
         resetShapes();
         textIsPressed = true;
+    }
+
+    public void setFill() {
+        resetShapes();
+        fillIsPressed = true;
     }
 
 
@@ -350,6 +364,7 @@ public class Controller {
 
 
     // decision of which shape and then placement
+    // TODO break up place method into smaller methods
     public void place() {
 
         canvas.setOnMouseClicked(e -> {
@@ -364,11 +379,11 @@ public class Controller {
                 model.add(r);
             }
             else if (circleIsPressed) {
-                Drawable c = new Circle(x, y, 50, cp.getValue());
+                Drawable c = new Circle(x, y, shape_size, cp.getValue());
                 model.add(c);
             }
             else if (triangleIsPressed) {
-                Drawable t = new Triangle(x, y, 30, cp.getValue());
+                Drawable t = new Triangle(x, y, shape_size, cp.getValue());
                 model.add(t);
             }
             else if (textIsPressed) {
@@ -406,6 +421,40 @@ public class Controller {
 
 
             }
+
+            else if (fillIsPressed)
+            {
+
+                Color newCol = cp.getValue();
+
+
+                double red, green, blue;
+
+                red =  cp.getValue().getRed() * 250;
+                System.out.println("red value inside cp colour");
+                green = newCol.getGreen() * 250;
+                blue =  newCol.getBlue() * 250;
+
+                int new_colour = (int) red << 16 | (int) green << 8 | (int) blue ;
+                int old_colour = bufferedImage.getRGB((int)x, (int)y);
+
+                java.awt.Color c = new java.awt.Color(new_colour);
+                //System.out.println(c.getRed()+"\n"+ c.getGreen()+"\n"+c.getBlue());
+
+                PaintBucket pb = new PaintBucket(bufferedImage);
+                pb.floodFill((int) x,(int) y, old_colour, new_colour);
+
+                try {
+                    File out = new File("OutFinal.jpg");
+                    ImageIO.write(bufferedImage, "jpg", out);
+                }
+
+                catch(IOException e2) {
+                    System.out.println(e2);
+                }
+
+            }
+
 
             model.drawPicture(canvas);
 

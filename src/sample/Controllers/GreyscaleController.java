@@ -51,11 +51,7 @@ public class GreyscaleController {
 
 
         if (bufferedImage != null) {
-            // brightness values on scale of -1 to 1 so we need to normalise value to get an appropriate brightness adjustment
 
-            // to reset image so that values dont add to previous image.
-
-            // UNDER CONSTRUCTION
             bufferedImage = ImageIO.read(f);
 
             filter = new Greyscale(bufferedImage);
@@ -64,7 +60,7 @@ public class GreyscaleController {
 
             File f = new File("Out.jpg");
 
-            img = new Image(f.toURI().toString(), 300, 200, true, true);
+            img = new Image(f.toURI().toString(), 550, 550, true, true);
             imgView.setImage(img);
 
 

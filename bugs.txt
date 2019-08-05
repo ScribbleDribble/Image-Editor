@@ -3,10 +3,9 @@ Stuff to do
 Bugs:
 UNRESOLVED
     - first point when creating a line isn't recognised. You will have to click on two more points for a line creation
+    - when drawing stuff on the canvas, it downscales image size to the size of the canvas
+	Possible fix: change canvas size back to file size when saving the image. 
 
-RESOLVED
-    - when using a filter it changes the size and look (calling the image constructor with different preferences
-    - to what we have been doing opening the file is maybe causing this.
 
 Other:
 UNHANDLED ERRORS
