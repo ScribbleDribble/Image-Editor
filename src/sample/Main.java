@@ -10,9 +10,6 @@ import javafx.stage.Stage;
 
 
 
-/**
- * @Author Micah Edwards
- */
 
 public class Main extends Application {
 

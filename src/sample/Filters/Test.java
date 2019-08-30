@@ -6,23 +6,26 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
+
 
 public class Test {
 
     public static void main(String[] args) throws IOException {
 
 
-        File f = new File("family.jpg");
-
+        File f = new File("red.jpg");
+        System.out.println(f.exists());
         BufferedImage image = ImageIO.read(f);
+        BufferedImage imageCopy = ImageIO.read(f);
 
+        Filter flip = new FlipHorizontal(image, imageCopy);
 
-        //Filter filter = new Brightness(image, 0);
+        flip.adjustPixels();
+        flip.saveChanges();
+        //Filter filter = new EdgeDetection("canny", f, image);
 
-        Filter filter = new EdgeDetection("canny", f, image);
-        filter.adjustPixels();
-        filter.saveChanges();
+        //filter.adjustPixels();
+        //filter.saveChanges();
 
     }
 }
