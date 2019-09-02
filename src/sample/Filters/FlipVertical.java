@@ -30,7 +30,10 @@ public class FlipVertical extends Filter {
         super.img = newImage;
     }
 
-
+    // returns buffered image with the resultant edit
+    public BufferedImage getCopyBufferedImage() {
+        return newImage;
+    }
 
 
 }

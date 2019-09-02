@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.canvas.*?>
@@ -14,7 +15,7 @@
   <top>
     <VBox>
       <children>
-        <MenuBar fx:id="myMenuBar" style="-fx-background-color: darkgrey;">
+        <MenuBar fx:id="myMenuBar" prefHeight="11.0" prefWidth="1920.0" styleClass="left" stylesheets="@../css/main.css">
           <menus>
             <Menu mnemonicParsing="false" text="File">
               <items>
@@ -47,12 +48,12 @@
     </VBox>
   </top>
    <left>
-      <VBox prefHeight="354.0" prefWidth="105.0" BorderPane.alignment="CENTER">
+      <VBox minWidth="29.0" prefHeight="1040.0" prefWidth="79.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane minWidth="128.0" prefHeight="1051.0" prefWidth="128.0" style="-fx-border-color: black; -fx-background-color: darkgrey;">
+            <AnchorPane fx:id="left" minWidth="57.0" prefHeight="1040.0" prefWidth="75.0" styleClass="left" stylesheets="@../css/main.css">
                <children>
-                  <Circle fx:id="circle" fill="#fcfcfc" layoutX="34.0" layoutY="124.0" onMouseClicked="#setShapeCircle" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Polygon fx:id="triangle" fill="#f7fafc" layoutX="34.0" layoutY="202.0" onMouseClicked="#setShapeTriangle" scaleX="0.5" scaleY="0.5" stroke="BLACK" strokeType="INSIDE">
+                  <Circle fx:id="circle" fill="#628395" layoutX="34.0" layoutY="124.0" onMouseClicked="#setShapeCircle" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Polygon fx:id="triangle" fill="#628395" layoutX="34.0" layoutY="202.0" onMouseClicked="#setShapeTriangle" scaleX="0.5" scaleY="0.5" stroke="BLACK" strokeType="INSIDE" styleClass="shapes">
                     <points>
                       <Double fx:value="-50.0" />
                       <Double fx:value="40.0" />
@@ -62,29 +63,47 @@
                       <Double fx:value="-60.0" />
                     </points>
                   </Polygon>
-                  <Rectangle fx:id="rect" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="40.0" layoutX="14.0" layoutY="34.0" onMouseClicked="#setShapeRect" stroke="BLACK" strokeType="INSIDE" width="40.0" />
-                  <CubicCurve fx:id="paintStart" controlX1="-50.0" controlX2="50.0" controlY1="-100.0" controlY2="100.0" endX="150.0" fill="#2197ff00" layoutX="64.0" layoutY="276.0" onMouseClicked="#paint" scaleX="0.4" startX="-150.0" stroke="BLACK" />
-                  <Text layoutX="14.0" layoutY="281.0" onMouseClicked="#paint" strokeType="OUTSIDE" strokeWidth="0.0" text="Paint" wrappingWidth="50.0" />
-                  <Text fx:id="text" layoutX="9.0" layoutY="498.0" onMouseClicked="#setText" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD TEXT" wrappingWidth="50.0" />
-                  <Line fx:id="line" endX="50.0" endY="40.0" layoutX="64.0" layoutY="333.0" onMouseClicked="#setLine" startX="-50.0" />
-                  <Circle fill="#f5f5f5" layoutX="115.0" layoutY="374.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Rectangle fx:id="rect" arcHeight="5.0" arcWidth="5.0" fill="#628395" height="40.0" layoutX="14.0" layoutY="34.0" onMouseClicked="#setShapeRect" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+                  <CubicCurve fx:id="paintStart" controlX1="-50.0" controlX2="50.0" controlY1="-100.0" controlY2="100.0" endX="150.0" fill="#2197ff00" layoutX="39.0" layoutY="275.0" onMouseClicked="#paint" scaleX="0.2" startX="-150.0" stroke="#628395" />
+                  <Text id="paintText" layoutX="14.0" layoutY="281.0" onMouseClicked="#paint" strokeType="OUTSIDE" strokeWidth="0.0" text="Paint" wrappingWidth="50.0" />
+                  <Text id="drawText" fx:id="text" layoutX="26.0" layoutY="435.0" onMouseClicked="#setText" strokeType="OUTSIDE" strokeWidth="0.0" text="T" wrappingWidth="17.0" />
+                  <Line fx:id="line" endX="50.0" endY="40.0" layoutX="34.0" layoutY="334.0" onMouseClicked="#setLine" scaleX="0.4" startX="-50.0" stroke="#628395" />
+                  <Circle fill="#f5f5f5" layoutX="54.0" layoutY="375.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
                   <Circle fill="#f5f5f5" layoutX="13.0" layoutY="333.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="61.0" layoutX="1.0" layoutY="322.0" onMouseClicked="#setLine" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="122.0" />
-                  <Text fx:id="fill" layoutX="9.0" layoutY="433.0" onMouseClicked="#setFill" strokeType="OUTSIDE" strokeWidth="0.0" text="FILL" wrappingWidth="50.0" />
                </children>
             </AnchorPane>
          </children></VBox>
    </left>
    <center>
-      <AnchorPane prefHeight="955.0" prefWidth="2041.0" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="largeArea" maxWidth="1847.0" prefHeight="1040.0" prefWidth="1847.0" styleClass="largeArea" stylesheets="@../css/main.css" BorderPane.alignment="CENTER">
          <children>
-            <Canvas fx:id="canvas" height="550.0" layoutX="671.0" layoutY="250.0" onMouseClicked="#place" width="550.0" />
-            <AnchorPane layoutX="-1.0" layoutY="947.0" prefHeight="103.0" prefWidth="1794.0" style="-fx-background-color: darkgrey; -fx-border-color: black;">
+            <Canvas fx:id="canvas" height="550.0" layoutX="665.0" layoutY="247.0" onMouseClicked="#place" width="550.0" />
+            <AnchorPane prefHeight="86.0" prefWidth="1840.0" styleClass="editBar">
                <children>
-                  <Text layoutX="556.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Size" wrappingWidth="50.0" />
-                  <Text layoutX="759.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Colour" wrappingWidth="50.0" />
-                  <TextField fx:id="sizeField" layoutX="590.0" layoutY="14.0" prefHeight="25.0" prefWidth="60.0" />
-                  <ColorPicker fx:id="cp" layoutX="820.0" layoutY="15.0" />
+                  <Text layoutX="14.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="categoryText" text="Size" wrappingWidth="50.0" />
+                  <Text layoutX="137.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="categoryText" text="Colour" wrappingWidth="55.0" />
+                  <TextField fx:id="sizeField" layoutX="48.0" layoutY="36.0" prefHeight="16.0" prefWidth="46.0" />
+                  <ColorPicker fx:id="cp" layoutX="197.0" layoutY="35.0" prefHeight="31.0" prefWidth="53.0" />
+                  <ImageView fx:id="fill" fitHeight="38.0" fitWidth="36.0" layoutX="317.0" layoutY="30.0" onMouseClicked="#setFill">
+                     <image>
+                        <Image url="@../Images/paintbucket.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="vFlip" fitHeight="38.0" fitWidth="36.0" layoutX="428.0" layoutY="22.0" onMouseClicked="#verticalFlip">
+                     <image>
+                        <Image url="@../Images/Flip.png" />
+                     </image>
+                  </ImageView>
+                  <Line endX="100.0" layoutX="378.0" layoutY="41.0" rotate="-90.0" scaleX="0.42" startX="-105.0" stroke="#d8d8f6" />
+                  <Text layoutX="164.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textTitle" text="Object" wrappingWidth="65.6708984375" />
+                  <Text layoutX="508.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="textTitle" text="Image" wrappingWidth="65.6708984375" />
+                  <Text layoutX="412.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="categoryText" text="Vertical Flip" wrappingWidth="88.6708984375" />
+                  <ImageView fx:id="hFlip" fitHeight="38.0" fitWidth="36.0" layoutX="574.0" layoutY="26.0" onMouseClicked="#horizontalFlip">
+                     <image>
+                        <Image url="@../Images/FlipH.png" />
+                     </image>
+                  </ImageView>
+                  <Text layoutX="555.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="categoryText" text="Horizontal Flip" wrappingWidth="110.6708984375" />
                </children>
             </AnchorPane>
          </children>

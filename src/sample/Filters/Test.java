@@ -18,10 +18,17 @@ public class Test {
         BufferedImage image = ImageIO.read(f);
         BufferedImage imageCopy = ImageIO.read(f);
 
-        Filter flip = new FlipHorizontal(image, imageCopy);
-
+        Filter flip = new FlipVertical(image, imageCopy);
         flip.adjustPixels();
         flip.saveChanges();
+
+        BufferedImage image2 = ImageIO.read(f);
+        BufferedImage imageCopy2 = ImageIO.read(f);
+
+        Filter flip2 = new FlipVertical(image, imageCopy2);
+        flip2.adjustPixels();
+        flip2.saveChanges();
+
         //Filter filter = new EdgeDetection("canny", f, image);
 
         //filter.adjustPixels();

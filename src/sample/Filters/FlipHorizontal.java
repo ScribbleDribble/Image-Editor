@@ -31,6 +31,10 @@ public class FlipHorizontal extends Filter {
     }
 
 
+    // returns buffered image with the resultant edit
+    public BufferedImage getCopyBufferedImage() {
+        return newImage;
+    }
 
 
 }

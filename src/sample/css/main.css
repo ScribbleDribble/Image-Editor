@@ -1,0 +1,47 @@
+.left {
+    -fx-border-color: #757083;
+    -fx-background-color: #4D5061;
+    -fx-border-width: 2px;
+}
+
+#drawText {
+
+    -fx-font-family: "Times New Roman", Times, serif;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+
+}
+
+#paintText {
+
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+
+}
+
+.categoryText {
+
+    -fx-font-weight: bold;
+
+}
+
+.textTitle {
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+}
+
+.editBar {
+    -fx-border-color: #757083;
+    -fx-background-color: #4D5061;
+    -fx-border-width: 1px;
+}
+
+.largeArea {
+    -fx-border-color: #757083;
+    -fx-background-color: #30323D;
+}
+
+.shapes {
+    -fx-background-color: #628395;
+}
+

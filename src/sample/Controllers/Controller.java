@@ -1,14 +1,10 @@
 package sample.Controllers;
 
-
 import javafx.event.ActionEvent;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -17,48 +13,38 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-
 import javafx.scene.image.WritableImage;
-
 import javafx.scene.paint.Color;
 import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
-
+import sample.Filters.Filter;
+import sample.Filters.FlipHorizontal;
+import sample.Filters.FlipVertical;
 import sample.Frame.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import javafx.embed.swing.SwingFXUtils;
-
 import javafx.stage.Modality;
-
 import sample.Frame.Circle;
 import sample.Frame.Drawable;
 import sample.Frame.Text;
 import sample.Frame.Triangle;
 import sample.Model.PictureModel;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-
 import java.io.File;
 import java.io.IOException;
-
 import sample.Toolkit.PaintBucket;
 
 public class Controller {
 
     @FXML
     MenuItem menuOpenFile;
-
     @FXML
     MenuBar myMenuBar;
-
-
     @FXML
     MenuItem menuBrightness;
-
     @FXML
     MenuItem menuContrast;
     @FXML
@@ -101,21 +87,19 @@ public class Controller {
     Line line;
 
     @FXML
-    javafx.scene.text.Text fill;
+    javafx.scene.image.ImageView fill;
+    @FXML
+    javafx.scene.image.ImageView vFlip;
+    @FXML
+    javafx.scene.image.ImageView hFlip;
 
     private Image img = null;
-
     private BufferedImage bufferedImage = null;
-
     private File f;
-
     private static final int IMAGE_WIDTH = 550;
-
     private static final int IMAGE_HEIGHT = 550;
-
     private double img_width;
     private double img_height;
-
     private static final int LINE_POINTS = 4;
 
     private int line_points = 2;
@@ -153,7 +137,6 @@ public class Controller {
     }
 
     public void menuOpenFileAction(ActionEvent e) {
-
         File initialDir = new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Pictures");
         FileChooser fc = new FileChooser();
 
@@ -161,14 +144,11 @@ public class Controller {
 
         // set supported images to load
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png, *.JPEG"));
-
         File selectedFile = fc.showOpenDialog(null);
 
         if (selectedFile != null) {
 
-
             Image image = new Image(selectedFile.toURI().toString(), IMAGE_WIDTH, IMAGE_HEIGHT, true, true);
-
             //testing
             img_height =  image.getHeight();
             img_width = image.getWidth();
@@ -194,18 +174,13 @@ public class Controller {
             }
 
             //instantiate a new model
-
             model = new PictureModel();
-
-
             pointStorage = new PointStorage();
 
         } else {
             // TODO display warning msg or image to user
             System.out.println("file not found");
         }
-
-
     }
 
     public void setImage(Image img) {
@@ -239,10 +214,7 @@ public class Controller {
         {
             stageLoader("../Views/EdgeDetection.fxml");
         }
-
-
     }
-
 
     public void stageLoader(String fxmlFile) throws IOException {
 
@@ -278,7 +250,47 @@ public class Controller {
 
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
+    }
 
+
+    public void verticalFlip() throws IOException{
+
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+
+        BufferedImage imgCopy = ImageIO.read(f);
+        FlipVertical verticalFlip = new FlipVertical(bufferedImage, imgCopy);
+        verticalFlip.adjustPixels();
+        verticalFlip.saveChanges();
+
+        f = new File("OutFinal.jpg");
+        img = new Image(f.toURI().toString(), 550, 550, true, true);
+
+        // update canvas and buffered image
+        setImage(img);
+        setBufferedImage(verticalFlip.getCopyBufferedImage());
+
+        gc.drawImage(img, 0, 0);
+
+    }
+
+    public void horizontalFlip() throws IOException{
+
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+        BufferedImage imgCopy = ImageIO.read(f);
+        FlipHorizontal horizontalFlip = new FlipHorizontal(bufferedImage, imgCopy);
+        horizontalFlip.adjustPixels();
+        horizontalFlip.saveChanges();
+
+        f = new File("OutFinal.jpg");
+        img = new Image(f.toURI().toString(), 550, 550, true, true);
+
+        // update canvas and buffered image
+        setImage(img);
+        setBufferedImage(horizontalFlip.getCopyBufferedImage());
+
+        gc.drawImage(img, 0, 0);
     }
 
     // action to be performed once the rectangle shape has been clicked
@@ -323,8 +335,6 @@ public class Controller {
         fillIsPressed = true;
     }
 
-
-
     public void paint() {
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -357,8 +367,6 @@ public class Controller {
         });
 
     }
-
-
     // decision of which shape and then placement
     // TODO break up place method into smaller methods
     public void place() {
@@ -366,9 +374,7 @@ public class Controller {
         canvas.setOnMouseClicked(e -> {
             double x = e.getX();
             double y = e.getY();
-
             int shape_size = Integer.parseInt(sizeField.getText());
-
 
             if (rectangleIsPressed) {
                 Drawable r = new Rectangle(x, y, shape_size, cp.getValue());
@@ -398,10 +404,9 @@ public class Controller {
 
                 if ( pointStorage.size() == LINE_POINTS )
                 {
-
                     int line_width = Integer.parseInt(sizeField.getText());
 
-                    double arr[] = {0, 0, 0, 0};
+                    double[] arr = {0, 0, 0, 0};
                     int j = 3;
 
                     for (int i = 0; i < 4; i++)
@@ -410,10 +415,8 @@ public class Controller {
                     }
 
                     Drawable line = new sample.Frame.Line(arr[0], arr[1], arr[2], arr[3], line_width, cp.getValue());
-
                     model.add(line);
                 }
-
 
             }
 
@@ -453,9 +456,7 @@ public class Controller {
                             canvas.getWidth(),
                             canvas.getHeight()
                     );
-
                     gc.drawImage(img, 0, 0);
-
                     canvasDraw = false;
                 }
 
@@ -469,11 +470,9 @@ public class Controller {
             if (canvasDraw) {
                 model.drawPicture(canvas);
 
-
                 // take a snapshot of the canvas and write it to a writable image
                 WritableImage wr = new WritableImage((int) img_width, (int) img_height);
                 WritableImage writableImage = canvas.snapshot(new SnapshotParameters(), wr);
-
 
                 try {
                     this.bufferedImage = canvasToBufferedImage(writableImage);
@@ -487,12 +486,11 @@ public class Controller {
                 f = new File("OutFinal.jpg");
             }
             canvasDraw = true;
-            //fillIsPressed = false;
         });
 
     }
 
-    private BufferedImage canvasToBufferedImage(WritableImage writableImage) throws IOException {
+    private BufferedImage canvasToBufferedImage(WritableImage writableImage) {
 
         bufferedImage = SwingFXUtils.fromFXImage(writableImage, null);
 
@@ -504,5 +502,4 @@ public class Controller {
 
         return bufferedImage1;
     }
-
 }

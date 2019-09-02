@@ -55,8 +55,6 @@ public class BrightnessController implements Initializable {
         slider.setValue(INIT_VALUE);
         slider.setMin(-255);
         slider.setMax(255);
-
-
     }
 
     // supplies image data to the local filter controller
@@ -71,9 +69,6 @@ public class BrightnessController implements Initializable {
         ImageIO.write(bufferedImage, "jpg", out);
     }
 
-
-
-
     public void btnAdjustBrightnessAction(ActionEvent event) throws IOException {
 
         if (bufferedImage != null) {
@@ -83,7 +78,6 @@ public class BrightnessController implements Initializable {
             // to reset image so that values dont add to previous image.
 
             bufferedImage = ImageIO.read(f);
-
 
             Filter filter = new Brightness(bufferedImage, (int) (slider.getValue()));
             filter.adjustPixels();
@@ -96,7 +90,6 @@ public class BrightnessController implements Initializable {
             imgView.setImage(img);
 
             this.filter = filter;
-
 
         } else {
             System.out.println("no image selected");
