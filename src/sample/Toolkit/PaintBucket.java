@@ -65,7 +65,6 @@ public class PaintBucket {
                 curDown[1] = cur[1] + 1;
                 curUp[1] = cur[1] - 1;
 
-
                 stack.push(curDown);
                 stack.push(curUp);
                 stack.push(curLeft);

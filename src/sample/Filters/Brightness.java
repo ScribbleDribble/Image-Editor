@@ -20,11 +20,8 @@ public class Brightness extends Filter{
     public BufferedImage getImage() {
         return getImg();
     }
-    /*
-    public Brightness(File f) {
-        this.f = f;
-    }
-    */
+
+
     public void adjustPixels() {
 
         int r, g, b, adjusted_r, adjusted_g, adjusted_b;
