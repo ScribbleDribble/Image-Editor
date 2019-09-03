@@ -20,7 +20,7 @@ public class Blur extends Filter{
                                 };
 
     String mode;
-
+    //convolution result
     BufferedImage newImage;
 
     public Blur(BufferedImage bufferedImage, BufferedImage copyImage, String kernel) throws IOException {
@@ -28,7 +28,6 @@ public class Blur extends Filter{
         this.newImage = copyImage;
         this.mode = kernel;
     }
-
 
     @Override
     public void adjustPixels() {
@@ -53,7 +52,6 @@ public class Blur extends Filter{
             kernel = boxBlurKernel;
         }
 
-        int count = 0;
         for(int y = 0; y < height; y++)
             for (int x = 0; x < width; x++)
             {
@@ -83,20 +81,15 @@ public class Blur extends Filter{
 
                             tempY++;
                         }
-
                         tempX++;
                         tempY -= kernel.length;
                     }
-
-
 
                     newImage.setRGB(x, y, (int)redSum << 16 | (int)greenSum << 8 |(int) blueSum);
 
                     redSum = 0;
                     greenSum = 0;
                     blueSum = 0;
-
-                    count++;
                 }
 
                 else {

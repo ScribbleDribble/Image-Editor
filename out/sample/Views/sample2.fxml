@@ -30,6 +30,12 @@
             <Menu mnemonicParsing="false" text="Filters">
               <items>
                 <MenuItem fx:id="menuBrightness" mnemonicParsing="false" onAction="#menuItemAction" text="Brightness" />
+                        <Menu mnemonicParsing="false" text="Blurs">
+                           <items>
+                              <MenuItem fx:id="menuBox" mnemonicParsing="false" onAction="#menuItemAction" text="Box " />
+                              <MenuItem fx:id="menuGaussian" mnemonicParsing="false" onAction="#menuItemAction" text="Gaussian" />
+                           </items>
+                        </Menu>
                 <MenuItem fx:id="menuContrast" mnemonicParsing="false" onAction="#menuItemAction" text="Contrast" />
                 <MenuItem fx:id="menuColourOver" mnemonicParsing="false" onAction="#menuItemAction" text="Colour Over" />
                 <MenuItem fx:id="menuGamma" mnemonicParsing="false" onAction="#menuItemAction" text="Gamma" />
@@ -52,8 +58,8 @@
          <children>
             <AnchorPane fx:id="left" minWidth="57.0" prefHeight="1040.0" prefWidth="75.0" styleClass="left" stylesheets="@../css/main.css">
                <children>
-                  <Circle fx:id="circle" fill="#628395" layoutX="34.0" layoutY="124.0" onMouseClicked="#setShapeCircle" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Polygon fx:id="triangle" fill="#628395" layoutX="34.0" layoutY="202.0" onMouseClicked="#setShapeTriangle" scaleX="0.5" scaleY="0.5" stroke="BLACK" strokeType="INSIDE" styleClass="shapes">
+                  <Circle fx:id="circle" fill="#628395" layoutX="34.0" layoutY="124.0" onMouseClicked="#setShapeCircle" radius="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" />
+                  <Polygon fx:id="triangle" fill="#628395" layoutX="34.0" layoutY="202.0" onMouseClicked="#setShapeTriangle" scaleX="0.5" scaleY="0.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="5.0" styleClass="shapes">
                     <points>
                       <Double fx:value="-50.0" />
                       <Double fx:value="40.0" />
@@ -63,11 +69,11 @@
                       <Double fx:value="-60.0" />
                     </points>
                   </Polygon>
-                  <Rectangle fx:id="rect" arcHeight="5.0" arcWidth="5.0" fill="#628395" height="40.0" layoutX="14.0" layoutY="34.0" onMouseClicked="#setShapeRect" stroke="BLACK" strokeType="INSIDE" width="40.0" />
-                  <CubicCurve fx:id="paintStart" controlX1="-50.0" controlX2="50.0" controlY1="-100.0" controlY2="100.0" endX="150.0" fill="#2197ff00" layoutX="39.0" layoutY="275.0" onMouseClicked="#paint" scaleX="0.2" startX="-150.0" stroke="#628395" />
+                  <Rectangle fx:id="rect" arcHeight="5.0" arcWidth="5.0" fill="#628395" height="40.0" layoutX="14.0" layoutY="34.0" onMouseClicked="#setShapeRect" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" width="40.0" />
+                  <CubicCurve fx:id="paintStart" controlX1="-50.0" controlX2="50.0" controlY1="-100.0" controlY2="100.0" endX="150.0" fill="#2197ff00" layoutX="39.0" layoutY="275.0" onMouseClicked="#paint" scaleX="0.2" startX="-150.0" stroke="#628395" strokeWidth="4.0" />
                   <Text id="paintText" layoutX="14.0" layoutY="281.0" onMouseClicked="#paint" strokeType="OUTSIDE" strokeWidth="0.0" text="Paint" wrappingWidth="50.0" />
                   <Text id="drawText" fx:id="text" layoutX="26.0" layoutY="435.0" onMouseClicked="#setText" strokeType="OUTSIDE" strokeWidth="0.0" text="T" wrappingWidth="17.0" />
-                  <Line fx:id="line" endX="50.0" endY="40.0" layoutX="34.0" layoutY="334.0" onMouseClicked="#setLine" scaleX="0.4" startX="-50.0" stroke="#628395" />
+                  <Line fx:id="line" endX="50.0" endY="40.0" layoutX="34.0" layoutY="334.0" onMouseClicked="#setLine" scaleX="0.4" startX="-50.0" stroke="#628395" strokeWidth="4.0" />
                   <Circle fill="#f5f5f5" layoutX="54.0" layoutY="375.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
                   <Circle fill="#f5f5f5" layoutX="13.0" layoutY="333.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
                </children>
@@ -77,7 +83,7 @@
    <center>
       <AnchorPane fx:id="largeArea" maxWidth="1847.0" prefHeight="1040.0" prefWidth="1847.0" styleClass="largeArea" stylesheets="@../css/main.css" BorderPane.alignment="CENTER">
          <children>
-            <Canvas fx:id="canvas" height="550.0" layoutX="665.0" layoutY="247.0" onMouseClicked="#place" width="550.0" />
+            <Canvas fx:id="canvas" height="550.0" layoutX="665.0" layoutY="255.0" onMouseClicked="#place" width="550.0" />
             <AnchorPane prefHeight="86.0" prefWidth="1840.0" styleClass="editBar">
                <children>
                   <Text layoutX="14.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="categoryText" text="Size" wrappingWidth="50.0" />

@@ -55,6 +55,10 @@ public class Controller {
     MenuItem menuGamma;
     @FXML
     MenuItem menuEdgeDetection;
+    @FXML
+    MenuItem menuBox;
+    @FXML
+    MenuItem menuGaussian;
 
     @FXML
     javafx.scene.shape.Rectangle rect;
@@ -214,6 +218,16 @@ public class Controller {
         {
             stageLoader("../Views/EdgeDetection.fxml");
         }
+
+        else if (event.getSource() == menuGaussian)
+        {
+            stageLoader("../Views/Gaussian.fxml");
+        }
+        else if (event.getSource() == menuBox)
+        {
+            stageLoader("../Views/BoxBlur.fxml");
+        }
+
     }
 
     public void stageLoader(String fxmlFile) throws IOException {
@@ -243,6 +257,20 @@ public class Controller {
         {
             EdgeDetectionController edgeDetection = loader.getController();
             edgeDetection.setImageContext(img, bufferedImage, f, this);
+        }
+
+        // gaussian and box controllers will share same controller class due to similar functionality
+
+        else if (fxmlFile == "../Views/Gaussian.fxml")
+        {
+            GaussianBlurController gaussianBlurController = loader.getController();
+            gaussianBlurController.setImageContext(img, bufferedImage, f, this);
+        }
+
+        else if (fxmlFile == "../Views/BoxBlur.fxml")
+        {
+            GaussianBlurController gaussianBlurController = loader.getController();
+            gaussianBlurController.setImageContext(img, bufferedImage, f, this);
         }
 
         Stage stage = new Stage();
