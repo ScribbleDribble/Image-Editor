@@ -1,5 +1,8 @@
 package sample.Controllers;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,10 +17,13 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Shape;
 import sample.Filters.Filter;
 import sample.Filters.FlipHorizontal;
 import sample.Filters.FlipVertical;
@@ -35,6 +41,8 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
+
 import sample.Toolkit.PaintBucket;
 
 public class Controller {
@@ -97,6 +105,11 @@ public class Controller {
     @FXML
     javafx.scene.image.ImageView hFlip;
 
+    @FXML
+    public Pane pane;
+
+    private javafx.scene.shape.Rectangle r;
+
     private Image img = null;
     private BufferedImage bufferedImage = null;
     private File f;
@@ -105,6 +118,10 @@ public class Controller {
     private double img_width;
     private double img_height;
     private static final int LINE_POINTS = 4;
+
+    private int shapeOffset = 0;
+
+    private double[] mouseCoords = new double[2];
 
     private int line_points = 2;
 
@@ -120,9 +137,16 @@ public class Controller {
     private Boolean lineIsPressed = false;
     private Boolean fillIsPressed = false;
 
+    // flags for responseLoop
+    private Boolean ready = false;
+    private Boolean backgroundThreadRunning = false;
+    private Boolean switchOffBackgroundThread = false;
+
     // let canvasDraw = true be fault value
     // this variable here is to differentiate between drawing on canvas and writing straight to buffered image
     private Boolean canvasDraw = true;
+
+
 
     public Image getImage() {
         return img;
@@ -264,13 +288,13 @@ public class Controller {
         else if (fxmlFile == "../Views/Gaussian.fxml")
         {
             GaussianBlurController gaussianBlurController = loader.getController();
-            gaussianBlurController.setImageContext(img, bufferedImage, f, this);
+            gaussianBlurController.setImageContext(img, bufferedImage, f, this, "gaussian");
         }
 
         else if (fxmlFile == "../Views/BoxBlur.fxml")
         {
             GaussianBlurController gaussianBlurController = loader.getController();
-            gaussianBlurController.setImageContext(img, bufferedImage, f, this);
+            gaussianBlurController.setImageContext(img, bufferedImage, f, this, "boxBlur");
         }
 
         Stage stage = new Stage();
@@ -336,21 +360,41 @@ public class Controller {
     public void setShapeRect() {
         resetShapes();
         rectangleIsPressed = true;
+
+        if (backgroundThreadRunning)
+        {
+            switchOffBackgroundThread = true;
+        }
+        responseLoop();
+
+        // trigger flag to close current response loop thread if there is any
+
     }
 
     public void setShapeTriangle() {
         resetShapes();
         triangleIsPressed = true;
+        switchOffBackgroundThread = true;
+
+        responseLoop();
     }
 
     public void setShapeCircle() {
         resetShapes();
         circleIsPressed = true;
+        if (backgroundThreadRunning)
+        {
+            switchOffBackgroundThread = true;
+        }
+
+        responseLoop();
+
     }
 
     public void setLine() {
         resetShapes();
         lineIsPressed = true;
+        switchOffBackgroundThread = true;
     }
 
     public void setText() {
@@ -529,5 +573,112 @@ public class Controller {
         bufferedImage1.getGraphics().drawImage(bufferedImage, 0, 0, null);
 
         return bufferedImage1;
+    }
+
+    // interactivity section
+
+
+    public synchronized double[] setMouseCoords(MouseEvent e) {
+        mouseCoords[0] = e.getX();
+        mouseCoords[1] = e.getY();
+
+        return mouseCoords;
+    }
+
+    private Shape chooseShape(int size) {
+
+
+        if (rectangleIsPressed)
+        {
+            javafx.scene.shape.Rectangle rectangle = new javafx.scene.shape.Rectangle(0, 0, size, size);
+            shapeOffset = 1;
+            return rectangle;
+        }
+
+        else if (circleIsPressed)
+        {
+            javafx.scene.shape.Circle circle = new javafx.scene.shape.Circle(0, 0, size);
+            shapeOffset = size;
+            return circle;
+        }
+
+        else if (triangleIsPressed)
+        {
+            //Polygon triangle = new Polygon(3, 1)
+        }
+
+        return null;
+    }
+
+    public synchronized void responseLoop() {
+
+        int size = Integer.parseInt(sizeField.getText());
+
+        Shape shape;
+        shape = chooseShape(size);
+        shape.setFill(cp.getValue());
+
+        pane.getChildren().addAll(shape);
+
+        System.out.println(shape.toString());
+
+
+
+
+        Task<Void> backGroundLoop = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+
+
+                while (true)
+                {
+                    final CountDownLatch latch = new CountDownLatch(1);
+                    backgroundThreadRunning = true;
+
+                    if (switchOffBackgroundThread && ready)
+                    {
+                        // reset
+                        ready = false;
+                        switchOffBackgroundThread = false;
+                        return null;
+                    }
+
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            double mouseX, mouseY;
+
+                            shape.setFill(cp.getValue());
+
+                            if (switchOffBackgroundThread)
+                            {
+                                System.out.println("here");
+                                shape.setVisible(false);
+                                ready = true;
+                            }
+
+                            try {
+                                mouseX = mouseCoords[0];
+                                mouseY = mouseCoords[1];
+
+                                shape.setTranslateX(mouseX - shape.getLayoutX() + shapeOffset);
+                                shape.setTranslateY(mouseY - shape.getLayoutY() + shapeOffset);
+
+                            }
+
+                            finally {
+                                latch.countDown();
+                            }
+
+                        }
+                    });
+                    latch.await();
+                }
+
+            }
+        };
+
+        new Thread(backGroundLoop).start();
     }
 }

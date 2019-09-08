@@ -22,7 +22,7 @@
       <AnchorPane BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="194.0" layoutY="8.0" prefHeight="19.0" prefWidth="129.0" text="Add Box Blur" />
-            <Button fx:id="btnAdjust" layoutX="333.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnAdjustAction2" text="Adjust" />
+            <Button fx:id="btnAdjust" layoutX="333.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnAdjustAction" text="Adjust" />
             <Button fx:id="btnFinalise" layoutX="428.0" layoutY="2.0" mnemonicParsing="false" onAction="#btnFinaliseAction" text="Finalise" />
          </children>
       </AnchorPane>

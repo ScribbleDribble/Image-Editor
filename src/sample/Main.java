@@ -18,7 +18,7 @@ public class Main extends Application {
 
 
 
-        Parent root = FXMLLoader.load(getClass().getResource("Views/sample2.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Views/Home.fxml"));
 
         primaryStage.setTitle("Image Edit 1.0");
         primaryStage.setScene(new Scene(root, 1920, 1080));

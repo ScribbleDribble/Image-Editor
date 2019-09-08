@@ -26,10 +26,7 @@ public class Triangle implements Drawable {
 
     }
 
-    // this exists so we can calculate the relative points of a triangle based on the initial bottom left part of the
-    // triangle (x and y from constructor)
     public void calculatePoints() {
-
 
         //x and y coordinate for the top tip of the triangle
         yPoints[1] = y - e;
@@ -38,7 +35,6 @@ public class Triangle implements Drawable {
         // x and y coordinate for the
         xPoints[2] = x + e;
         yPoints[2] = y;
-
 
     }
 

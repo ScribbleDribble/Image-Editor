@@ -33,15 +33,16 @@ public class GaussianBlurController {
     private Filter filter;
     private static final int IMAGE_WIDTH = 550;
     private static final int IMAGE_HEIGHT = 550;
+    private String mode;
 
 
-    public void setImageContext(Image image, BufferedImage bufferedImage, File f, Controller controller) throws IOException {
+    public void setImageContext(Image image, BufferedImage bufferedImage, File f, Controller controller, String mode) throws IOException {
         this.img = image;
         this.bufferedImage = bufferedImage;
         imgView.setImage(this.img);
         this.f = f;
         this.controller = controller;
-
+        this.mode = mode;
         File out = new File("Out.jpg");
         //ImageIO.write(bufferedImage, "jpg", out);
     }
@@ -55,7 +56,8 @@ public class GaussianBlurController {
             bufferedImage = ImageIO.read(f);
             BufferedImage bufferedImageCopy = ImageIO.read(f);
 
-            filter = new Blur(bufferedImage, bufferedImageCopy, "gaussian");
+
+            filter = new Blur(bufferedImage, bufferedImageCopy, mode);
             filter.adjustPixels();
             filter.writeOver();
 
@@ -70,31 +72,6 @@ public class GaussianBlurController {
         }
 
     }
-
-    public void btnAdjustAction2() throws IOException {
-
-
-        if (bufferedImage != null) {
-
-            bufferedImage = ImageIO.read(f);
-            BufferedImage bufferedImageCopy = ImageIO.read(f);
-
-            filter = new Blur(bufferedImage, bufferedImageCopy, "gaussian");
-            filter.adjustPixels();
-            filter.writeOver();
-
-            File f = new File("Out.jpg");
-
-            img = new Image(f.toURI().toString(), IMAGE_WIDTH, IMAGE_HEIGHT, true, true);
-            imgView.setImage(img);
-
-
-        } else {
-            System.out.println("no image selected");
-        }
-
-    }
-
 
     public void btnFinaliseAction() throws IOException {
 
