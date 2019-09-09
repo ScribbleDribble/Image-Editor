@@ -1,6 +1,5 @@
 package sample.Controllers;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -25,7 +24,6 @@ import javafx.scene.shape.CubicCurve;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
-import sample.Filters.Filter;
 import sample.Filters.FlipHorizontal;
 import sample.Filters.FlipVertical;
 import sample.Frame.*;
@@ -354,7 +352,7 @@ public class Controller {
     // action to be performed once the rectangle shape has been clicked
 
     // use array instead and loop through all to set as false?
-    private void resetShapes() {
+    private void resetObjects() {
         rectangleIsPressed = false;
         triangleIsPressed = false;
         circleIsPressed = false;
@@ -370,7 +368,7 @@ public class Controller {
     }
 
     public void setShapeRect() {
-        resetShapes();
+        resetObjects();
         // trigger flag to close current response loop thread if there is any
         rectangleIsPressed = true;
         responseLoop();
@@ -380,36 +378,39 @@ public class Controller {
     }
 
     public void setShapeTriangle() {
-        resetShapes();
+        resetObjects();
         triangleIsPressed = true;
-
-
-//        responseLoop();
+        responseLoop();
     }
 
     public void setShapeCircle() {
-        resetShapes();
+        resetObjects();
         circleIsPressed = true;
-        //switchOffBackgroundThread = false;
         responseLoop();
 
     }
 
     public void setLine() {
-        resetShapes();
+        resetObjects();
         lineIsPressed = true;
         switchOffBackgroundThread = true;
     }
 
     public void setText() {
-        resetShapes();
+        resetObjects();
         textIsPressed = true;
     }
 
     public void setFill() {
-        resetShapes();
+        resetObjects();
         fillIsPressed = true;
 
+    }
+
+    public void setPaint() {
+        resetObjects();
+        paintIsPressed = true;
+        responseLoop();
     }
 
 
@@ -440,7 +441,6 @@ public class Controller {
                     gc.setFill(cp.getValue());
                     gc.fillRect(x, y, size, size);
                 }
-
 
             }
 
@@ -617,7 +617,18 @@ public class Controller {
 
         else if (triangleIsPressed)
         {
-            //Polygon triangle = new Polygon(3, 1)
+            Polygon polygon = new Polygon();
+            Triangle triangle = new Triangle(0, 0, size, cp.getValue());
+            double[] points = triangle.calculatePoints();
+            polygon.getPoints().addAll(new Double[]{points[0], points[1], points[2], points[3], points[4], points[5]});
+            return polygon;
+        }
+
+        else if (paintIsPressed)
+        {
+            javafx.scene.shape.Rectangle rectangle = new javafx.scene.shape.Rectangle(0, 0, size, size);
+            shapeOffset = 1;
+            return rectangle;
         }
 
         return null;
@@ -629,7 +640,9 @@ public class Controller {
 
         Shape shape;
         shape = chooseShape(size);
+
         shape.setFill(cp.getValue());
+
 
         pane.getChildren().addAll(shape);
 
@@ -655,6 +668,8 @@ public class Controller {
 
                             double mouseX, mouseY;
 
+                            System.out.println("Shape| isVisible " + shape + shape.isVisible());
+
                             shape.setFill(cp.getValue());
 
                             if (switchOffBackgroundThread)
@@ -670,6 +685,9 @@ public class Controller {
 
                                 // boundaries for responsive shapes so that they dont go over tool bars and potentially
                                 // block options
+
+                                if (paintIsPressed)
+                                    paint();
 
                                 if (mouseX - shape.getLayoutX() + shapeOffset > anchorPaneLeft.getLayoutX() &&
                                         mouseX - shape.getLayoutX() + shapeOffset < anchorPaneLeft.getLayoutX() + anchorPaneLeft.getWidth())
@@ -691,13 +709,11 @@ public class Controller {
                                     shape.setTranslateY(mouseY - shape.getLayoutY() + shapeOffset);
                                 }
 
-
                             }
 
                             finally {
                                 latch.countDown();
                             }
-
                         }
                     });
                     latch.await();

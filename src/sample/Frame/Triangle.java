@@ -26,7 +26,7 @@ public class Triangle implements Drawable {
 
     }
 
-    public void calculatePoints() {
+    public double[] calculatePoints() {
 
         //x and y coordinate for the top tip of the triangle
         yPoints[1] = y - e;
@@ -36,6 +36,10 @@ public class Triangle implements Drawable {
         xPoints[2] = x + e;
         yPoints[2] = y;
 
+        // return value for polygon constructor (responsive triangle)
+
+        double[] polygon = {xPoints[0], yPoints[0], xPoints[1], yPoints[1], xPoints[2], yPoints[2]};
+        return polygon;
     }
 
     @Override

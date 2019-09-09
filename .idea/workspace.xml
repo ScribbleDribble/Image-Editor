@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f209d505-67b1-44b8-a3e7-593e896c4ae5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Out.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Out.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OutFinal.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/OutFinal.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bugs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/bugs.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/sample/Controllers/Controller$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/sample/Controllers/Controller$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/sample/Controllers/Controller$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/sample/Controllers/Controller$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/sample/Controllers/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/sample/Controllers/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/sample/Views/Home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/sample/Views/Home.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Controllers/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controllers/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Frame/Triangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Frame/Triangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Views/Home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Views/Home.fxml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -35,11 +30,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/Controllers/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4212">
-              <caret line="427" column="48" selection-start-line="427" selection-start-column="48" selection-end-line="427" selection-end-column="48" />
+            <state relative-caret-position="-3195">
+              <caret line="445" lean-forward="true" selection-start-line="445" selection-end-line="445" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/Frame/Triangle.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="313">
+              <caret line="41" column="23" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -68,7 +72,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/Frame/Circle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
+            <state relative-caret-position="255">
               <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -161,8 +165,8 @@
         <option value="$PROJECT_DIR$/src/sample/css/Filter.css" />
         <option value="$PROJECT_DIR$/src/sample/Controllers/GaussianBlurController.java" />
         <option value="$PROJECT_DIR$/../drag/code.java" />
-        <option value="$PROJECT_DIR$/src/sample/Frame/Triangle.java" />
         <option value="$PROJECT_DIR$/src/sample/Main.java" />
+        <option value="$PROJECT_DIR$/src/sample/Frame/Triangle.java" />
         <option value="$PROJECT_DIR$/src/sample/Controllers/Controller.java" />
       </list>
     </option>
@@ -177,13 +181,41 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="Image-Editor-" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="Image-Editor-" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+            </path>
+            <path>
+              <item name="Image-Editor-" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="Image-Editor-" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="Image-Editor-" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="Image-Editor-" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="sample" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="Image-Editor-" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="Image-Editor-" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="sample" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Frame" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1567977794092" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1568053463538" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TEXT" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../old Image Edit" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -307,8 +339,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4978355" visible="true" weight="0.030872483" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4978355" visible="true" weight="0.1738255" />
       <window_info id="Structure" order="1" sideWeight="0.5021645" side_tool="true" weight="0.12550607" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -317,7 +350,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3285968" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.18230563" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.18230563" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.40921408" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -371,18 +404,6 @@
     <MESSAGE value="substituted image view for canvas on main scene so loaded image can be edited in more ways" />
     <MESSAGE value="Fixed mapping of canvas -&gt; buffered image. Implemented initial drawables" />
     <option name="LAST_COMMIT_MESSAGE" value="Fixed mapping of canvas -&gt; buffered image. Implemented initial drawables" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/sample/Controllers/Controller.java</url>
-          <line>631</line>
-          <properties />
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/sample/Filters/Greyscale.java">
@@ -621,13 +642,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Frame/Triangle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="46" column="22" selection-start-line="46" selection-start-column="22" selection-end-line="46" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Controllers/GaussianBlurController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="328">
@@ -664,39 +678,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Out.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OutFinal.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Controllers/BrightnessController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="68" selection-start-line="68" selection-end-line="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="72" selection-start-line="20" selection-start-column="72" selection-end-line="20" selection-end-column="72" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Frame/Circle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/javafx-src.zip!/com/sun/glass/ui/win/WinApplication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="137">
@@ -718,10 +699,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Out.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OutFinal.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Controllers/BrightnessController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="68" selection-start-line="68" selection-end-line="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Frame/Circle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="14" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="72" selection-start-line="20" selection-start-column="72" selection-end-line="20" selection-end-column="72" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Frame/Triangle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="41" column="23" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Controllers/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4212">
-          <caret line="427" column="48" selection-start-line="427" selection-start-column="48" selection-end-line="427" selection-end-column="48" />
+        <state relative-caret-position="-3195">
+          <caret line="445" lean-forward="true" selection-start-line="445" selection-end-line="445" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
