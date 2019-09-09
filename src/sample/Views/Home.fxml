@@ -52,7 +52,7 @@
       </VBox>
       <VBox layoutY="36.0" minWidth="29.0" prefHeight="1040.0" prefWidth="79.0">
          <children>
-            <AnchorPane fx:id="left" minWidth="57.0" prefHeight="1053.0" prefWidth="79.0" styleClass="left" stylesheets="@../css/main.css">
+            <AnchorPane fx:id="anchorPaneLeft" minWidth="57.0" prefHeight="1053.0" prefWidth="79.0" styleClass="left" stylesheets="@../css/main.css">
                <children>
                   <Circle fx:id="circle" fill="#628395" layoutX="34.0" layoutY="124.0" onMouseClicked="#setShapeCircle" radius="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" />
                   <Polygon fx:id="triangle" fill="#628395" layoutX="34.0" layoutY="202.0" onMouseClicked="#setShapeTriangle" scaleX="0.5" scaleY="0.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="5.0" styleClass="shapes">
@@ -76,11 +76,11 @@
             </AnchorPane>
          </children>
       </VBox>
-      <AnchorPane layoutX="79.0" layoutY="36.0" prefHeight="86.0" prefWidth="1840.0" styleClass="editBar" stylesheets="@../css/main.css">
+      <AnchorPane fx:id="anchorPaneUp" layoutX="79.0" layoutY="36.0" prefHeight="86.0" prefWidth="1840.0" styleClass="editBar" stylesheets="@../css/main.css">
          <children>
             <Text layoutX="14.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="categoryText" text="Size" wrappingWidth="50.0" />
             <Text layoutX="137.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="categoryText" text="Colour" wrappingWidth="55.0" />
-            <TextField fx:id="sizeField" layoutX="48.0" layoutY="36.0" prefHeight="16.0" prefWidth="46.0" />
+            <TextField fx:id="sizeField" layoutX="48.0" layoutY="36.0" prefHeight="16.0" prefWidth="46.0" text="20" />
             <ColorPicker fx:id="cp" layoutX="197.0" layoutY="35.0" prefHeight="31.0" prefWidth="53.0" />
             <ImageView fx:id="fill" fitHeight="38.0" fitWidth="36.0" layoutX="317.0" layoutY="30.0" onMouseClicked="#setFill">
                <image>

@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.CubicCurve;
@@ -104,6 +105,10 @@ public class Controller {
     javafx.scene.image.ImageView vFlip;
     @FXML
     javafx.scene.image.ImageView hFlip;
+    @FXML
+    AnchorPane anchorPaneLeft;
+    @FXML
+    AnchorPane anchorPaneUp;
 
     @FXML
     public Pane pane;
@@ -136,6 +141,7 @@ public class Controller {
     private Boolean textIsPressed = false;
     private Boolean lineIsPressed = false;
     private Boolean fillIsPressed = false;
+    private Boolean paintIsPressed = false;
 
     // flags for responseLoop
     private Boolean ready = false;
@@ -355,38 +361,36 @@ public class Controller {
         textIsPressed = false;
         lineIsPressed = false;
         fillIsPressed = false;
-    }
-
-    public void setShapeRect() {
-        resetShapes();
-        rectangleIsPressed = true;
+        paintIsPressed = false;
 
         if (backgroundThreadRunning)
         {
             switchOffBackgroundThread = true;
         }
+    }
+
+    public void setShapeRect() {
+        resetShapes();
+        // trigger flag to close current response loop thread if there is any
+        rectangleIsPressed = true;
         responseLoop();
 
-        // trigger flag to close current response loop thread if there is any
+
 
     }
 
     public void setShapeTriangle() {
         resetShapes();
         triangleIsPressed = true;
-        switchOffBackgroundThread = true;
 
-        responseLoop();
+
+//        responseLoop();
     }
 
     public void setShapeCircle() {
         resetShapes();
         circleIsPressed = true;
-        if (backgroundThreadRunning)
-        {
-            switchOffBackgroundThread = true;
-        }
-
+        //switchOffBackgroundThread = false;
         responseLoop();
 
     }
@@ -405,12 +409,14 @@ public class Controller {
     public void setFill() {
         resetShapes();
         fillIsPressed = true;
+
     }
+
+
 
     public void paint() {
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        resetShapes();
 
         canvas.setOnMouseDragged(e -> {
 
@@ -427,8 +433,15 @@ public class Controller {
                 double x = e.getX();
                 double y = e.getY();
 
-                gc.setFill(cp.getValue());
-                gc.fillRect(x, y, size, size);
+                // workaround - couldn't get switch this part off
+                if (!rectangleIsPressed && !circleIsPressed && !triangleIsPressed && !lineIsPressed && !textIsPressed
+                      && !fillIsPressed)
+                {
+                    gc.setFill(cp.getValue());
+                    gc.fillRect(x, y, size, size);
+                }
+
+
             }
 
             catch (NullPointerException err)
@@ -620,16 +633,9 @@ public class Controller {
 
         pane.getChildren().addAll(shape);
 
-        System.out.println(shape.toString());
-
-
-
-
         Task<Void> backGroundLoop = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
-
-
                 while (true)
                 {
                     final CountDownLatch latch = new CountDownLatch(1);
@@ -653,17 +659,38 @@ public class Controller {
 
                             if (switchOffBackgroundThread)
                             {
-                                System.out.println("here");
                                 shape.setVisible(false);
                                 ready = true;
+
                             }
 
                             try {
                                 mouseX = mouseCoords[0];
                                 mouseY = mouseCoords[1];
 
-                                shape.setTranslateX(mouseX - shape.getLayoutX() + shapeOffset);
-                                shape.setTranslateY(mouseY - shape.getLayoutY() + shapeOffset);
+                                // boundaries for responsive shapes so that they dont go over tool bars and potentially
+                                // block options
+
+                                if (mouseX - shape.getLayoutX() + shapeOffset > anchorPaneLeft.getLayoutX() &&
+                                        mouseX - shape.getLayoutX() + shapeOffset < anchorPaneLeft.getLayoutX() + anchorPaneLeft.getWidth())
+                                {
+                                    shape.setTranslateX(anchorPaneLeft.getLayoutX() + anchorPaneLeft.getWidth());
+                                    shape.setTranslateY(mouseY - shape.getLayoutX() + shapeOffset);
+                                }
+
+                                else if (mouseY - shape.getLayoutY() + shapeOffset > anchorPaneUp.getLayoutY() &&
+                                        mouseY - shape.getLayoutY() + shapeOffset < anchorPaneUp.getLayoutY() + anchorPaneUp.getHeight())
+                                {
+                                    shape.setTranslateX(mouseX - shape.getLayoutX() + shapeOffset);
+                                    shape.setTranslateY(anchorPaneUp.getLayoutY() + anchorPaneUp.getHeight());
+                                }
+
+                                else
+                                {
+                                    shape.setTranslateX(mouseX - shape.getLayoutX() + shapeOffset);
+                                    shape.setTranslateY(mouseY - shape.getLayoutY() + shapeOffset);
+                                }
+
 
                             }
 
